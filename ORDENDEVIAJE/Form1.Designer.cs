@@ -38,8 +38,6 @@
             checkBoxVerContraseña = new CheckBox();
             label4 = new Label();
             label5 = new Label();
-            pictureBoxOjo = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxOjo).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -125,23 +123,12 @@
             label5.Size = new Size(36, 25);
             label5.TabIndex = 8;
             // 
-            // pictureBoxOjo
-            // 
-            pictureBoxOjo.Image = Properties.Resources.show_216957;
-            pictureBoxOjo.Location = new Point(328, 282);
-            pictureBoxOjo.Name = "pictureBoxOjo";
-            pictureBoxOjo.Size = new Size(19, 17);
-            pictureBoxOjo.TabIndex = 9;
-            pictureBoxOjo.TabStop = false;
-            pictureBoxOjo.Click += pictureBoxOjo_Click;
-            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FloralWhite;
-            ClientSize = new Size(621, 421);
-            Controls.Add(pictureBoxOjo);
+            ClientSize = new Size(324, 421);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(checkBoxVerContraseña);
@@ -155,7 +142,6 @@
             Name = "Login";
             Text = "Login";
             Load += Login_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBoxOjo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -171,6 +157,5 @@
         private CheckBox checkBoxVerContraseña;
         private Label label4;
         private Label label5;
-        private PictureBox pictureBoxOjo;
     }
 }

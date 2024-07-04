@@ -10,12 +10,9 @@ namespace ORDENDEVIAJE
         {
             InitializeComponent();
             textBox2.UseSystemPasswordChar = true;
-            // Establecer la imagen inicial del PictureBox al ojo cerrado
-            pictureBoxOjo.Image = Properties.Resources.hide_216928;
-            pictureBoxOjo.Cursor = Cursors.Hand; // Cambiar el cursor a mano para indicar que es clickeable
 
-            // Añadir evento click al PictureBox
-            pictureBoxOjo.Click += new EventHandler(pictureBoxOjo_Click);
+            // Establecer la imagen inicial del PictureBox al ojo cerrado
+
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -84,16 +81,8 @@ namespace ORDENDEVIAJE
 
         private void pictureBoxOjo_Click(object sender, EventArgs e)
         {
-            if (isInitialImage)
-            {
-                pictureBoxOjo.Image = Image.FromFile("C:\\Users\\moran\\source\\repos\\ORDENDEVIAJE\\imagenes\\show_216957.png"); // Cambia a la ruta de tu segunda imagen
-            }
-            else
-            {
-                pictureBoxOjo.Image = Image.FromFile("C:\\Users\\moran\\source\\repos\\ORDENDEVIAJE\\imagenes\\hide_216928.png"); // Cambia a la ruta de tu imagen inicial
-            }
+            // Alternar la visibilidad de la contraseña
 
-            isInitialImage = !isInitialImage;
         }
     }
     }
