@@ -29,23 +29,17 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             label1 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
+            textBoxGuiaTransportista = new TextBox();
             label3 = new Label();
-            textBox2 = new TextBox();
+            textBoxGuiaCliente = new TextBox();
             label4 = new Label();
             label6 = new Label();
-            textBox3 = new TextBox();
+            textBoxDescripcionProducto = new TextBox();
             button1 = new Button();
             dataGridView1 = new DataGridView();
-            guiaTransportista = new DataGridViewTextBoxColumn();
-            guiaCliente = new DataGridViewTextBoxColumn();
-            ruta1 = new DataGridViewTextBoxColumn();
-            ruta2 = new DataGridViewTextBoxColumn();
-            numManifiesto = new DataGridViewTextBoxColumn();
-            plantaDescarga = new DataGridViewTextBoxColumn();
-            descProducto = new DataGridViewTextBoxColumn();
             button2 = new Button();
             button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -70,15 +64,16 @@
             label2.Size = new Size(152, 20);
             label2.TabIndex = 1;
             label2.Text = "N° Guia Transportista:";
-            label2.Click += label2_Click;
+            //label2.Click += label2_Click;
             // 
-            // textBox1
+            // textBoxGuiaTransportista
             // 
-            textBox1.Location = new Point(203, 63);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(228, 32);
-            textBox1.TabIndex = 2;
+            textBoxGuiaTransportista.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxGuiaTransportista.Location = new Point(203, 63);
+            textBoxGuiaTransportista.Margin = new Padding(3, 2, 3, 2);
+            textBoxGuiaTransportista.Name = "textBoxGuiaTransportista";
+            textBoxGuiaTransportista.Size = new Size(228, 27);
+            textBoxGuiaTransportista.TabIndex = 2;
             // 
             // label3
             // 
@@ -89,15 +84,16 @@
             label3.Size = new Size(113, 20);
             label3.TabIndex = 3;
             label3.Text = "N° Guia Cliente:";
-            label3.Click += label3_Click;
+            //label3.Click += label3_Click;
             // 
-            // textBox2
+            // textBoxGuiaCliente
             // 
-            textBox2.Location = new Point(766, 63);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(228, 32);
-            textBox2.TabIndex = 4;
+            textBoxGuiaCliente.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxGuiaCliente.Location = new Point(766, 63);
+            textBoxGuiaCliente.Margin = new Padding(3, 2, 3, 2);
+            textBoxGuiaCliente.Name = "textBoxGuiaCliente";
+            textBoxGuiaCliente.Size = new Size(228, 27);
+            textBoxGuiaCliente.TabIndex = 4;
             // 
             // label4
             // 
@@ -119,13 +115,14 @@
             label6.TabIndex = 9;
             label6.Text = "Descripcion de Producto:";
             // 
-            // textBox3
+            // textBoxDescripcionProducto
             // 
-            textBox3.Location = new Point(203, 147);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(228, 34);
-            textBox3.TabIndex = 10;
+            textBoxDescripcionProducto.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxDescripcionProducto.Location = new Point(203, 147);
+            textBoxDescripcionProducto.Multiline = true;
+            textBoxDescripcionProducto.Name = "textBoxDescripcionProducto";
+            textBoxDescripcionProducto.Size = new Size(228, 34);
+            textBoxDescripcionProducto.TabIndex = 10;
             // 
             // button1
             // 
@@ -141,77 +138,29 @@
             // dataGridView1
             // 
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { guiaTransportista, guiaCliente, ruta1, ruta2, numManifiesto, plantaDescarga, descProducto });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Location = new Point(12, 267);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1062, 169);
             dataGridView1.TabIndex = 12;
-            // 
-            // guiaTransportista
-            // 
-            guiaTransportista.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            guiaTransportista.HeaderText = "N° Guia Transportista";
-            guiaTransportista.MinimumWidth = 6;
-            guiaTransportista.Name = "guiaTransportista";
-            guiaTransportista.Resizable = DataGridViewTriState.False;
-            // 
-            // guiaCliente
-            // 
-            guiaCliente.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            guiaCliente.HeaderText = "N° Guia Cliente";
-            guiaCliente.MinimumWidth = 6;
-            guiaCliente.Name = "guiaCliente";
-            guiaCliente.Resizable = DataGridViewTriState.False;
-            // 
-            // ruta1
-            // 
-            ruta1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ruta1.HeaderText = "Ruta 1";
-            ruta1.MinimumWidth = 6;
-            ruta1.Name = "ruta1";
-            ruta1.Resizable = DataGridViewTriState.False;
-            // 
-            // ruta2
-            // 
-            ruta2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ruta2.HeaderText = "Ruta 2";
-            ruta2.MinimumWidth = 6;
-            ruta2.Name = "ruta2";
-            ruta2.Resizable = DataGridViewTriState.False;
-            // 
-            // numManifiesto
-            // 
-            numManifiesto.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            numManifiesto.HeaderText = "N° Manifiesto";
-            numManifiesto.MinimumWidth = 6;
-            numManifiesto.Name = "numManifiesto";
-            numManifiesto.Resizable = DataGridViewTriState.False;
-            // 
-            // plantaDescarga
-            // 
-            plantaDescarga.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            plantaDescarga.HeaderText = "Planta de Descarga";
-            plantaDescarga.MinimumWidth = 6;
-            plantaDescarga.Name = "plantaDescarga";
-            plantaDescarga.Resizable = DataGridViewTriState.False;
-            // 
-            // descProducto
-            // 
-            descProducto.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            descProducto.HeaderText = "Descripcion de Producto";
-            descProducto.MinimumWidth = 6;
-            descProducto.Name = "descProducto";
-            descProducto.Resizable = DataGridViewTriState.False;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // button2
             // 
@@ -222,6 +171,7 @@
             button2.TabIndex = 13;
             button2.Text = "Guardar";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -242,12 +192,12 @@
             Controls.Add(button2);
             Controls.Add(dataGridView1);
             Controls.Add(button1);
-            Controls.Add(textBox3);
+            Controls.Add(textBoxDescripcionProducto);
             Controls.Add(label6);
             Controls.Add(label4);
-            Controls.Add(textBox2);
+            Controls.Add(textBoxGuiaCliente);
             Controls.Add(label3);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxGuiaTransportista);
             Controls.Add(label2);
             Controls.Add(label1);
             Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -265,12 +215,12 @@
 
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox textBoxGuiaTransportista;
         private Label label3;
-        private TextBox textBox2;
+        private TextBox textBoxGuiaCliente;
         private Label label4;
         private Label label6;
-        private TextBox textBox3;
+        private TextBox textBoxDescripcionProducto;
         private Button button1;
         private DataGridView dataGridView1;
         private Button button2;

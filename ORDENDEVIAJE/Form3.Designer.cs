@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
+            Ruta = new DataGridViewComboBoxColumn();
+            Añadir = new DataGridViewCheckBoxColumn();
             button1 = new Button();
             label1 = new Label();
             comboBox2 = new ComboBox();
             label2 = new Label();
             textBox3 = new TextBox();
             button2 = new Button();
-            Ruta = new DataGridViewComboBoxColumn();
-            Añadir = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -49,6 +49,23 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(300, 188);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // Ruta
+            // 
+            Ruta.HeaderText = "Ruta";
+            Ruta.Items.AddRange(new object[] { "Sullana-Trujillo-Sullana", "Sullana-Guayaquil-Sullana" });
+            Ruta.MinimumWidth = 6;
+            Ruta.Name = "Ruta";
+            Ruta.Width = 125;
+            // 
+            // Añadir
+            // 
+            Añadir.HeaderText = "Añadir";
+            Añadir.MinimumWidth = 6;
+            Añadir.Name = "Añadir";
+            Añadir.Resizable = DataGridViewTriState.True;
+            Añadir.Width = 125;
             // 
             // button1
             // 
@@ -71,6 +88,7 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "JAVE" });
             comboBox2.Location = new Point(181, 321);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(151, 28);
@@ -100,22 +118,7 @@
             button2.TabIndex = 6;
             button2.Text = "Guardar";
             button2.UseVisualStyleBackColor = true;
-            // 
-            // Ruta
-            // 
-            Ruta.HeaderText = "Ruta";
-            Ruta.Items.AddRange(new object[] { "Sullana-Trujillo-Sullana", "Sullana-Guayaquil-Sullana" });
-            Ruta.MinimumWidth = 6;
-            Ruta.Name = "Ruta";
-            Ruta.Width = 125;
-            // 
-            // Añadir
-            // 
-            Añadir.HeaderText = "Añadir";
-            Añadir.MinimumWidth = 6;
-            Añadir.Name = "Añadir";
-            Añadir.Resizable = DataGridViewTriState.True;
-            Añadir.Width = 125;
+            button2.Click += button2_Click;
             // 
             // Form3
             // 

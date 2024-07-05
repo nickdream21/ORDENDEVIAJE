@@ -118,5 +118,39 @@ namespace ORDENDEVIAJE
                 textBox3.Enabled = false;
             }
         }
+
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form4 parentForm = (Form4)this.Owner;
+
+            if (parentForm != null) // Asegúrate de que parentForm no es null
+            {
+                // Asume que las rutas se encuentran en dataGridView1
+                if (dataGridView1.Rows.Count > 0)
+                {
+                    parentForm.Ruta1 = dataGridView1.Rows[0].Cells[0].Value?.ToString();
+                    if (dataGridView1.Rows.Count > 1)
+                    {
+                        parentForm.Ruta2 = dataGridView1.Rows[1].Cells[0].Value?.ToString();
+                    }
+                }
+
+                parentForm.NumeroManifiesto = textBox3.Text; // Aquí asigna el valor ingresado en el textBox3 del Form3
+                parentForm.PlantaDescarga = comboBox2.SelectedItem?.ToString();
+
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo obtener la referencia del formulario principal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
