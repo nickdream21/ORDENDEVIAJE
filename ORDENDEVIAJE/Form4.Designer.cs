@@ -64,7 +64,6 @@
             label2.Size = new Size(152, 20);
             label2.TabIndex = 1;
             label2.Text = "N° Guia Transportista:";
-            //label2.Click += label2_Click;
             // 
             // textBoxGuiaTransportista
             // 
@@ -84,7 +83,6 @@
             label3.Size = new Size(113, 20);
             label3.TabIndex = 3;
             label3.Text = "N° Guia Cliente:";
-            //label3.Click += label3_Click;
             // 
             // textBoxGuiaCliente
             // 
@@ -182,6 +180,7 @@
             button3.TabIndex = 14;
             button3.Text = "Siguiente";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // Form4
             // 
