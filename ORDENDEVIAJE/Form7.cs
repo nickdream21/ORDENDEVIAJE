@@ -28,6 +28,7 @@ namespace ORDENDEVIAJE
             dataGridViewIngresos.Columns.Add("soles", "Soles (S/)");
             dataGridViewIngresos.Columns.Add("dolares", "Dolares ($)");
 
+
             // Deshabilitar la ordenación por columna
             foreach (DataGridViewColumn column in dataGridViewIngresos.Columns)
             {
