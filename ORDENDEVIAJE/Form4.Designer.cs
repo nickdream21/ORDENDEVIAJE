@@ -38,10 +38,10 @@
             label4 = new Label();
             label6 = new Label();
             textBoxDescripcionProducto = new TextBox();
-            button1 = new Button();
+            buttonElegir = new Button();
+            buttonGuardar = new Button();
+            buttonSiguiente = new Button();
             dataGridView1 = new DataGridView();
-            button2 = new Button();
-            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -122,75 +122,78 @@
             textBoxDescripcionProducto.Size = new Size(228, 34);
             textBoxDescripcionProducto.TabIndex = 10;
             // 
-            // button1
+            // buttonElegir
             // 
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(203, 106);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 11;
-            button1.Text = "Elegir";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonElegir.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonElegir.Location = new Point(203, 106);
+            buttonElegir.Name = "buttonElegir";
+            buttonElegir.Size = new Size(94, 29);
+            buttonElegir.TabIndex = 11;
+            buttonElegir.Text = "Elegir";
+            buttonElegir.UseVisualStyleBackColor = true;
+            buttonElegir.Click += buttonElegir_Click;
+            // 
+            // buttonGuardar
+            // 
+            buttonGuardar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonGuardar.Location = new Point(18, 217);
+            buttonGuardar.Name = "buttonGuardar";
+            buttonGuardar.Size = new Size(94, 29);
+            buttonGuardar.TabIndex = 13;
+            buttonGuardar.Text = "Guardar";
+            buttonGuardar.UseVisualStyleBackColor = true;
+            buttonGuardar.Click += buttonGuardar_Click;
+            // 
+            // buttonSiguiente
+            // 
+            buttonSiguiente.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonSiguiente.Location = new Point(980, 460);
+            buttonSiguiente.Name = "buttonSiguiente";
+            buttonSiguiente.Size = new Size(94, 29);
+            buttonSiguiente.TabIndex = 14;
+            buttonSiguiente.Text = "Siguiente";
+            buttonSiguiente.UseVisualStyleBackColor = true;
+            buttonSiguiente.Click += buttonSiguiente_Click;
             // 
             // dataGridView1
             // 
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.BackgroundColor = SystemColors.Control;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Location = new Point(12, 267);
+            dataGridView1.Location = new Point(18, 273);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1062, 169);
-            dataGridView1.TabIndex = 12;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // button2
-            // 
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(18, 217);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 13;
-            button2.Text = "Guardar";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // button3
-            // 
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(980, 460);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 14;
-            button3.Text = "Siguiente";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            dataGridView1.Size = new Size(1039, 126);
+            dataGridView1.TabIndex = 15;
             // 
             // Form4
             // 
             AutoScaleDimensions = new SizeF(13F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1091, 501);
-            Controls.Add(button3);
-            Controls.Add(button2);
             Controls.Add(dataGridView1);
-            Controls.Add(button1);
+            Controls.Add(buttonSiguiente);
+            Controls.Add(buttonGuardar);
+            Controls.Add(buttonElegir);
             Controls.Add(textBoxDescripcionProducto);
             Controls.Add(label6);
             Controls.Add(label4);
@@ -220,9 +223,8 @@
         private Label label4;
         private Label label6;
         private TextBox textBoxDescripcionProducto;
-        private Button button1;
-        private DataGridView dataGridView1;
-        private Button button2;
+        private Button buttonElegir;
+        private Button buttonGuardar;
         private DataGridViewTextBoxColumn guiaTransportista;
         private DataGridViewTextBoxColumn guiaCliente;
         private DataGridViewTextBoxColumn ruta1;
@@ -230,6 +232,7 @@
         private DataGridViewTextBoxColumn numManifiesto;
         private DataGridViewTextBoxColumn plantaDescarga;
         private DataGridViewTextBoxColumn descProducto;
-        private Button button3;
+        private Button buttonSiguiente;
+        private DataGridView dataGridView1;
     }
 }

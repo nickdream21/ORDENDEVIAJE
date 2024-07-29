@@ -49,8 +49,8 @@
             dateTimePicker2 = new DateTimePicker();
             label12 = new Label();
             textBox4 = new TextBox();
-            button2 = new Button();
-            button3 = new Button();
+            buttonGuardar = new Button();
+            buttonContinuar = new Button();
             comboBox4 = new ComboBox();
             label13 = new Label();
             label14 = new Label();
@@ -243,24 +243,25 @@
             textBox4.Size = new Size(743, 54);
             textBox4.TabIndex = 29;
             // 
-            // button2
+            // buttonGuardar
             // 
-            button2.Location = new Point(577, 516);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 30;
-            button2.Text = "Guardar";
-            button2.UseVisualStyleBackColor = true;
+            buttonGuardar.Location = new Point(577, 516);
+            buttonGuardar.Name = "buttonGuardar";
+            buttonGuardar.Size = new Size(94, 29);
+            buttonGuardar.TabIndex = 30;
+            buttonGuardar.Text = "Guardar";
+            buttonGuardar.UseVisualStyleBackColor = true;
+            buttonGuardar.Click += buttonGuardar_Click;
             // 
-            // button3
+            // buttonContinuar
             // 
-            button3.Location = new Point(677, 516);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 31;
-            button3.Text = "Continuar";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            buttonContinuar.Location = new Point(677, 516);
+            buttonContinuar.Name = "buttonContinuar";
+            buttonContinuar.Size = new Size(94, 29);
+            buttonContinuar.TabIndex = 31;
+            buttonContinuar.Text = "Continuar";
+            buttonContinuar.UseVisualStyleBackColor = true;
+            buttonContinuar.Click += buttonContinuar_Click;
             // 
             // comboBox4
             // 
@@ -342,8 +343,8 @@
             Controls.Add(label14);
             Controls.Add(label13);
             Controls.Add(comboBox4);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(buttonContinuar);
+            Controls.Add(buttonGuardar);
             Controls.Add(textBox4);
             Controls.Add(label12);
             Controls.Add(dateTimePicker2);
@@ -397,14 +398,14 @@
         private Label label11;
         private Label label12;
         private TextBox textBox4;
-        private Button button2;
-        private Button button3;
+        private Button buttonGuardar;
+        private Button buttonContinuar;
         private ComboBox comboBox4;
         private Label label13;
         private Label label14;
         private Label label15;
         private TextBox textBox3;
-        private TextBox textBox5;
+        public TextBox textBox5;
         private ComboBox comboBox3;
         private Label label16;
     }

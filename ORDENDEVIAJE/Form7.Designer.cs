@@ -35,9 +35,12 @@
             label3 = new Label();
             panel1 = new Panel();
             button1 = new Button();
+            buttonGuardar = new Button();
+            dataGridViewTotales = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridViewIngresos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGastos).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTotales).BeginInit();
             SuspendLayout();
             // 
             // dataGridViewIngresos
@@ -56,7 +59,7 @@
             dataGridViewGastos.Location = new Point(43, 358);
             dataGridViewGastos.Name = "dataGridViewGastos";
             dataGridViewGastos.RowHeadersWidth = 51;
-            dataGridViewGastos.Size = new Size(863, 188);
+            dataGridViewGastos.Size = new Size(863, 241);
             dataGridViewGastos.TabIndex = 1;
             // 
             // label1
@@ -108,11 +111,32 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // buttonGuardar
+            // 
+            buttonGuardar.Location = new Point(812, 861);
+            buttonGuardar.Name = "buttonGuardar";
+            buttonGuardar.Size = new Size(94, 29);
+            buttonGuardar.TabIndex = 9;
+            buttonGuardar.Text = "Guardar";
+            buttonGuardar.UseVisualStyleBackColor = true;
+            buttonGuardar.Click += buttonGuardar_Click;
+            // 
+            // dataGridViewTotales
+            // 
+            dataGridViewTotales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewTotales.Location = new Point(43, 653);
+            dataGridViewTotales.Name = "dataGridViewTotales";
+            dataGridViewTotales.RowHeadersWidth = 51;
+            dataGridViewTotales.Size = new Size(458, 227);
+            dataGridViewTotales.TabIndex = 10;
+            // 
             // Form7
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1057, 682);
+            ClientSize = new Size(961, 915);
+            Controls.Add(dataGridViewTotales);
+            Controls.Add(buttonGuardar);
             Controls.Add(button1);
             Controls.Add(panel1);
             Controls.Add(label3);
@@ -125,6 +149,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewGastos).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTotales).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,5 +163,7 @@
         private Label label3;
         private Panel panel1;
         private Button button1;
+        private Button buttonGuardar;
+        private DataGridView dataGridViewTotales;
     }
 }
