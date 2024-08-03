@@ -222,6 +222,7 @@
             dateTimePicker2.Format = DateTimePickerFormat.Time;
             dateTimePicker2.Location = new Point(508, 238);
             dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.ShowUpDown = true;
             dateTimePicker2.Size = new Size(84, 27);
             dateTimePicker2.TabIndex = 27;
             dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;

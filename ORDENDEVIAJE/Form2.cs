@@ -34,6 +34,11 @@ namespace ORDENDEVIAJE
             LoadTractos();
             LoadCarretas();
 
+
+            // Configurar el ComboBox para autocompletar
+            comboBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
         }
 
         private void LoadClientes()
@@ -75,8 +80,44 @@ namespace ORDENDEVIAJE
                 comboBox2.DataSource = dataTable;
                 comboBox2.DisplayMember = "placaTracto";
                 comboBox2.ValueMember = "idTracto";
+
+                // Guardar las placas en AutoCompleteCustomSource para búsqueda manual
+                AutoCompleteStringCollection autoCompleteData = new AutoCompleteStringCollection();
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    autoCompleteData.Add(row["placaTracto"].ToString());
+                }
+                comboBox2.AutoCompleteCustomSource = autoCompleteData;
+              
             }
         }
+        private void ComboBox2_DropDown(object sender, EventArgs e)
+        {
+            // Evitar que se desplieguen todas las opciones automáticamente
+            comboBox2.DroppedDown = false;
+        }
+        private void ComboBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            // Filtrar las opciones según el texto ingresado
+            string searchText = comboBox2.Text;
+            var filteredItems = comboBox2.AutoCompleteCustomSource.Cast<string>().Where(item => item.StartsWith(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            if (filteredItems.Count > 0)
+            {
+                comboBox2.DroppedDown = true;
+                comboBox2.Items.Clear();
+                comboBox2.Items.AddRange(filteredItems.ToArray());
+                comboBox2.SelectionStart = searchText.Length;
+                comboBox2.SelectionLength = 0;
+                Cursor.Current = Cursors.Default;
+            }
+            else
+            {
+                comboBox2.DroppedDown = false;
+                comboBox2.SelectionStart = searchText.Length;
+            }
+        }
+
 
         private void LoadCarretas()
         {

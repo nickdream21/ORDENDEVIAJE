@@ -96,6 +96,7 @@
             label3.Name = "label3";
             label3.Size = new Size(144, 163);
             label3.TabIndex = 5;
+            label3.Click += label3_Click;
             // 
             // checkBoxVerContraseña
             // 
