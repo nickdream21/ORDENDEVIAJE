@@ -37,6 +37,7 @@
             label2 = new Label();
             textBox3 = new TextBox();
             button2 = new Button();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -79,6 +80,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.FloralWhite;
             label1.Location = new Point(32, 324);
             label1.Name = "label1";
             label1.Size = new Size(117, 20);
@@ -97,6 +99,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.FloralWhite;
             label2.Location = new Point(32, 364);
             label2.Name = "label2";
             label2.Size = new Size(103, 20);
@@ -120,6 +123,14 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FloralWhite;
+            panel1.Location = new Point(1, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(356, 447);
+            panel1.TabIndex = 7;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -132,6 +143,7 @@
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
+            Controls.Add(panel1);
             Name = "Form3";
             Text = "Form3";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -150,5 +162,6 @@
         private Button button2;
         private DataGridViewComboBoxColumn Ruta;
         private DataGridViewCheckBoxColumn Añadir;
+        private Panel panel1;
     }
 }

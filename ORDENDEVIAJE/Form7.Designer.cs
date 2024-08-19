@@ -37,6 +37,7 @@
             button1 = new Button();
             buttonGuardar = new Button();
             dataGridViewTotales = new DataGridView();
+            panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridViewIngresos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGastos).BeginInit();
             panel1.SuspendLayout();
@@ -45,6 +46,7 @@
             // 
             // dataGridViewIngresos
             // 
+            dataGridViewIngresos.BackgroundColor = Color.FloralWhite;
             dataGridViewIngresos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewIngresos.Location = new Point(43, 122);
             dataGridViewIngresos.Name = "dataGridViewIngresos";
@@ -55,6 +57,7 @@
             // 
             // dataGridViewGastos
             // 
+            dataGridViewGastos.BackgroundColor = Color.FloralWhite;
             dataGridViewGastos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewGastos.Location = new Point(43, 358);
             dataGridViewGastos.Name = "dataGridViewGastos";
@@ -77,6 +80,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.FloralWhite;
             label2.Location = new Point(43, 80);
             label2.Name = "label2";
             label2.Size = new Size(67, 20);
@@ -86,6 +90,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.FloralWhite;
             label3.Location = new Point(43, 325);
             label3.Name = "label3";
             label3.Size = new Size(56, 20);
@@ -94,11 +99,11 @@
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.GradientActiveCaption;
+            panel1.BackColor = Color.Bisque;
             panel1.Controls.Add(label1);
             panel1.Location = new Point(43, 19);
             panel1.Name = "panel1";
-            panel1.Size = new Size(863, 40);
+            panel1.Size = new Size(863, 44);
             panel1.TabIndex = 5;
             // 
             // button1
@@ -123,12 +128,21 @@
             // 
             // dataGridViewTotales
             // 
+            dataGridViewTotales.BackgroundColor = Color.FloralWhite;
             dataGridViewTotales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewTotales.Location = new Point(43, 653);
             dataGridViewTotales.Name = "dataGridViewTotales";
             dataGridViewTotales.RowHeadersWidth = 51;
             dataGridViewTotales.Size = new Size(458, 227);
             dataGridViewTotales.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FloralWhite;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(963, 915);
+            panel2.TabIndex = 11;
             // 
             // Form7
             // 
@@ -143,6 +157,7 @@
             Controls.Add(label2);
             Controls.Add(dataGridViewGastos);
             Controls.Add(dataGridViewIngresos);
+            Controls.Add(panel2);
             Name = "Form7";
             Text = "Form7";
             ((System.ComponentModel.ISupportInitialize)dataGridViewIngresos).EndInit();
@@ -165,5 +180,6 @@
         private Button button1;
         private Button buttonGuardar;
         private DataGridView dataGridViewTotales;
+        private Panel panel2;
     }
 }

@@ -184,7 +184,7 @@
             buttonRegistroCarretas.Padding = new Padding(35, 0, 0, 0);
             buttonRegistroCarretas.Size = new Size(280, 50);
             buttonRegistroCarretas.TabIndex = 2;
-            buttonRegistroCarretas.Text = "Carretas";
+            buttonRegistroCarretas.Text = "Semiremolques";
             buttonRegistroCarretas.TextAlign = ContentAlignment.MiddleLeft;
             buttonRegistroCarretas.UseVisualStyleBackColor = false;
             buttonRegistroCarretas.Click += buttonRegistroCarretas_Click;

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,13 +10,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
+using ComboBox = System.Windows.Forms.ComboBox; // Añade esto para evitar la ambigüedad
 
 namespace ORDENDEVIAJE
 {
     public partial class Form2 : Form
     {
         private string connectionString = "server=NICK;database=SGV;integrated security=true";
+        private bool isUpdating = false;
+        private DataTable tractosDataTable; // Declarar tractosDataTable aquí
+        private DataTable carretasDataTable; // Declarar carretasDataTable aquí
+        private DataTable conductoresDataTable; // Declarar conductoresDataTable aquí
+        private DataTable clientesDataTable;
 
         public Form2()
         {
@@ -34,11 +39,29 @@ namespace ORDENDEVIAJE
             LoadTractos();
             LoadCarretas();
 
+            // Desactivar el autocompletado del ComboBox y habilitar la búsqueda manual
 
-            // Configurar el ComboBox para autocompletar
-            comboBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ConfigureComboBox(comboBox1);
+            ConfigureComboBox(comboBox2);
+            ConfigureComboBox(comboBox3);
+            ConfigureComboBox(comboBox4);
 
+        }
+
+        private void ConfigureComboBox(ComboBox comboBox)
+        {
+            comboBox.AutoCompleteMode = AutoCompleteMode.None;
+            comboBox.AutoCompleteSource = AutoCompleteSource.None;
+            comboBox.DropDownStyle = ComboBoxStyle.DropDownList; // Cambiar a DropDownList
+            comboBox.MaxDropDownItems = 10;
+            if (comboBox == comboBox1)
+                comboBox.TextUpdate += ComboBox1_TextUpdate;
+            else if (comboBox == comboBox2)
+                comboBox.TextUpdate += ComboBox2_TextUpdate;
+            else if (comboBox == comboBox3)
+                comboBox.TextUpdate += ComboBox3_TextUpdate;
+            else if (comboBox == comboBox4)
+                comboBox.TextUpdate += ComboBox4_TextUpdate;
         }
 
         private void LoadClientes()
@@ -60,11 +83,13 @@ namespace ORDENDEVIAJE
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
                 conexion.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT idConductor, nombre FROM Conductor", conexion);
+                // Concatenar los nombres y apellidos directamente en la consulta SQL
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT idConductor, RTRIM(apPaterno) + ' ' + RTRIM(apMaterno) + ' ' + RTRIM(nombre) AS NombreCompleto FROM Conductor", conexion);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
+
                 comboBox4.DataSource = dataTable;
-                comboBox4.DisplayMember = "nombre";
+                comboBox4.DisplayMember = "NombreCompleto";
                 comboBox4.ValueMember = "idConductor";
             }
         }
@@ -75,49 +100,108 @@ namespace ORDENDEVIAJE
             {
                 conexion.Open();
                 SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT idTracto, placaTracto FROM Tracto", conexion);
-                DataTable dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
-                comboBox2.DataSource = dataTable;
+                tractosDataTable = new DataTable(); // Inicializar tractosDataTable
+                dataAdapter.Fill(tractosDataTable);
+                comboBox2.DataSource = tractosDataTable;
                 comboBox2.DisplayMember = "placaTracto";
                 comboBox2.ValueMember = "idTracto";
-
-                // Guardar las placas en AutoCompleteCustomSource para búsqueda manual
-                AutoCompleteStringCollection autoCompleteData = new AutoCompleteStringCollection();
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    autoCompleteData.Add(row["placaTracto"].ToString());
-                }
-                comboBox2.AutoCompleteCustomSource = autoCompleteData;
-              
             }
         }
-        private void ComboBox2_DropDown(object sender, EventArgs e)
-        {
-            // Evitar que se desplieguen todas las opciones automáticamente
-            comboBox2.DroppedDown = false;
-        }
-        private void ComboBox2_KeyUp(object sender, KeyEventArgs e)
-        {
-            // Filtrar las opciones según el texto ingresado
-            string searchText = comboBox2.Text;
-            var filteredItems = comboBox2.AutoCompleteCustomSource.Cast<string>().Where(item => item.StartsWith(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            if (filteredItems.Count > 0)
+        /*private void ComboBox2_TextUpdate(object sender, EventArgs e)
+        {
+            if (tractosDataTable == null)
+                return;
+
+            ComboBox comboBox = (ComboBox)sender;
+            string searchText = comboBox.Text;
+
+            // Filtrar los elementos según el texto ingresado
+            var filteredItems = tractosDataTable.AsEnumerable()
+                .Where(row => row.Field<string>("placaTracto").StartsWith(searchText, StringComparison.OrdinalIgnoreCase));
+
+            if (filteredItems.Any())
             {
-                comboBox2.DroppedDown = true;
-                comboBox2.Items.Clear();
-                comboBox2.Items.AddRange(filteredItems.ToArray());
-                comboBox2.SelectionStart = searchText.Length;
-                comboBox2.SelectionLength = 0;
+                DataTable filteredDataTable = filteredItems.CopyToDataTable();
+
+                // Desactivar temporalmente el DataSource
+                comboBox.DataSource = null;
+
+                // Añadir los elementos filtrados
+                comboBox.Items.Clear();
+                foreach (DataRow row in filteredDataTable.Rows)
+                {
+                    comboBox.Items.Add(row["placaTracto"].ToString());
+                }
+
+                // Restaurar el texto original
+                comboBox.Text = searchText;
+
+                // Establecer la posición del cursor
+                comboBox.SelectionStart = searchText.Length;
+                comboBox.SelectionLength = 0;
+
+                // Mostrar la lista desplegable si hay elementos filtrados
+                comboBox.DroppedDown = true;
                 Cursor.Current = Cursors.Default;
             }
             else
             {
-                comboBox2.DroppedDown = false;
-                comboBox2.SelectionStart = searchText.Length;
+                comboBox.DroppedDown = false;
             }
+        }*/
+
+
+        private void ComboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            FiltrarComboBox(comboBox1, clientesDataTable, "nombre");
+        }
+        // Método para filtrar y mostrar datos en comboBox2
+        private void ComboBox2_TextUpdate(object sender, EventArgs e)
+        {
+            FiltrarComboBox(comboBox2, tractosDataTable, "placaTracto");
         }
 
+        private void ComboBox3_TextUpdate(object sender, EventArgs e)
+        {
+            FiltrarComboBox(comboBox3, carretasDataTable, "placaCarreta");
+        }
+
+        private void ComboBox4_TextUpdate(object sender, EventArgs e)
+        {
+            FiltrarComboBox(comboBox4, conductoresDataTable, "NombreCompleto");
+        }
+
+        private void FiltrarComboBox(ComboBox comboBox, DataTable dataTable, string columnName)
+        {
+            if (dataTable == null)
+                return;
+
+            string searchText = comboBox.Text;
+
+            var filteredItems = dataTable.AsEnumerable()
+                .Where(row => row.Field<string>(columnName).StartsWith(searchText, StringComparison.OrdinalIgnoreCase));
+
+            if (filteredItems.Any())
+            {
+                DataTable filteredDataTable = filteredItems.CopyToDataTable();
+                comboBox.DataSource = null;
+                comboBox.Items.Clear();
+                foreach (DataRow row in filteredDataTable.Rows)
+                {
+                    comboBox.Items.Add(row[columnName].ToString());
+                }
+                comboBox.Text = searchText;
+                comboBox.SelectionStart = searchText.Length;
+                comboBox.SelectionLength = 0;
+                comboBox.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+            }
+            else
+            {
+                comboBox.DroppedDown = false;
+            }
+        }
 
         private void LoadCarretas()
         {
@@ -151,35 +235,27 @@ namespace ORDENDEVIAJE
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
-
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
         }
-
-
 
         private void buttonContinuar_Click(object sender, EventArgs e)
         {
@@ -198,19 +274,41 @@ namespace ORDENDEVIAJE
             form4.Show();
             this.Hide();
         }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
-
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
 
             // Verificar que los campos obligatorios no estén vacíos
+            StringBuilder mensajeError = new StringBuilder();
+
             if (string.IsNullOrWhiteSpace(textBox5.Text))
             {
-                MessageBox.Show("El campo N° Orden Viaje debe estar lleno.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mensajeError.AppendLine("El campo N° Orden Viaje debe estar lleno.");
+            }
+            if (comboBox1.SelectedIndex == -1)
+            {
+                mensajeError.AppendLine("Debe seleccionar un Cliente.");
+            }
+            if (comboBox2.SelectedIndex == -1)
+            {
+                mensajeError.AppendLine("Debe seleccionar una Placa de Tracto.");
+            }
+            if (comboBox3.SelectedIndex == -1)
+            {
+                mensajeError.AppendLine("Debe seleccionar una Placa de Carreta.");
+            }
+            if (comboBox4.SelectedIndex == -1)
+            {
+                mensajeError.AppendLine("Debe seleccionar un Conductor.");
+            }
+
+            if (mensajeError.Length > 0)
+            {
+                MessageBox.Show(mensajeError.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -262,7 +360,7 @@ namespace ORDENDEVIAJE
                         // Deshabilitar el botón "Guardar"
                         buttonGuardar.Enabled = false;
                     }
-                    catch(SqlException ex)
+                    catch (SqlException ex)
                     {
                         if (ex.Number == 2627) // Número de error para violación de clave única
                         {
@@ -273,10 +371,8 @@ namespace ORDENDEVIAJE
                             MessageBox.Show("Ocurrió un error al guardar los datos. Por favor, inténtelo nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    
                 }
             }
         }
     }
-    }
-
+}

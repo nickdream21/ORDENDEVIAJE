@@ -18,12 +18,17 @@ namespace ORDENDEVIAJE
 
         public Form4(Form2 form2Instance, string numeroOrdenViaje)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             form2 = form2Instance;
             NumeroOrdenViaje = numeroOrdenViaje;
 
             InitializeDataGridView();
             LoadData();
+
+
+            // Inicializar el botón Siguiente como deshabilitado
+            buttonSiguiente.Enabled = false;
         }
 
         private void InitializeDataGridView()
@@ -153,12 +158,15 @@ namespace ORDENDEVIAJE
             // Recargar los datos después de la inserción
             LoadData();
             buttonGuardar.Enabled = false;
+
+            // Habilitar el botón Siguiente después de guardar
+            buttonSiguiente.Enabled = true;
         }
 
         private void buttonSiguiente_Click(object sender, EventArgs e)
         {
             Form7 form7 = new Form7(form2);
-            form7.ShowDialog();
+            form7.Show();
             this.Close();
         }
     }

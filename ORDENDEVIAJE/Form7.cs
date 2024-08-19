@@ -17,6 +17,7 @@ namespace ORDENDEVIAJE
 
         public Form7(Form2 form2Instance)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             currentOrderId = int.Parse(form2Instance.textBox5.Text);
             InitializeDataGridView();
@@ -559,22 +560,37 @@ namespace ORDENDEVIAJE
                 connection.Open();
 
                 string query = @"
-        INSERT INTO Ingresos (despachoSoles, despachoDolares, prestamoSoles, prestamosDolares, mensualidadSoles, mensualidadDolares, otrosSoles, otrosDolares, totalDolares, totalSoles, numeroOrdenViaje)
-        VALUES (@despachoSoles, @despachoDolares, @prestamoSoles, @prestamosDolares, @mensualidadSoles, @mensualidadDolares, @otrosSoles, @otrosDolares, @totalDolares, @totalSoles, @numeroOrdenViaje)";
+INSERT INTO Ingresos (
+    despachoSoles, despachoDolares, prestamoSoles, prestamosDolares, 
+    mensualidadSoles, mensualidadDolares, otrosSoles, otrosDolares, 
+    totalDolares, totalSoles, numeroOrdenViaje, 
+    descDespacho, descMensualidad, descOtrosAutorizados, descPrestamo)
+VALUES (
+    @despachoSoles, @despachoDolares, @prestamoSoles, @prestamosDolares, 
+    @mensualidadSoles, @mensualidadDolares, @otrosSoles, @otrosDolares, 
+    @totalDolares, @totalSoles, @numeroOrdenViaje, 
+    @descDespacho, @descMensualidad, @descOtrosAutorizados, @descPrestamo)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@despachoSoles", dataGridViewIngresos.Rows[0].Cells["soles"].Value ?? 0);
-                    command.Parameters.AddWithValue("@despachoDolares", dataGridViewIngresos.Rows[0].Cells["dolares"].Value ?? 0);
-                    command.Parameters.AddWithValue("@prestamoSoles", dataGridViewIngresos.Rows[3].Cells["soles"].Value ?? 0);
-                    command.Parameters.AddWithValue("@prestamosDolares", dataGridViewIngresos.Rows[3].Cells["dolares"].Value ?? 0);
-                    command.Parameters.AddWithValue("@mensualidadSoles", dataGridViewIngresos.Rows[1].Cells["soles"].Value ?? 0);
-                    command.Parameters.AddWithValue("@mensualidadDolares", dataGridViewIngresos.Rows[1].Cells["dolares"].Value ?? 0);
-                    command.Parameters.AddWithValue("@otrosSoles", dataGridViewIngresos.Rows[2].Cells["soles"].Value ?? 0);
-                    command.Parameters.AddWithValue("@otrosDolares", dataGridViewIngresos.Rows[2].Cells["dolares"].Value ?? 0);
-                    command.Parameters.AddWithValue("@totalDolares", dataGridViewIngresos.Rows[4].Cells["dolares"].Value ?? 0);
-                    command.Parameters.AddWithValue("@totalSoles", dataGridViewIngresos.Rows[4].Cells["soles"].Value ?? 0);
+                    // Parámetros de valores
+                    command.Parameters.AddWithValue("@despachoSoles", GetValueOrDefault(dataGridViewIngresos.Rows[0].Cells["soles"].Value));
+                    command.Parameters.AddWithValue("@despachoDolares", GetValueOrDefault(dataGridViewIngresos.Rows[0].Cells["dolares"].Value));
+                    command.Parameters.AddWithValue("@prestamoSoles", GetValueOrDefault(dataGridViewIngresos.Rows[3].Cells["soles"].Value));
+                    command.Parameters.AddWithValue("@prestamosDolares", GetValueOrDefault(dataGridViewIngresos.Rows[3].Cells["dolares"].Value));
+                    command.Parameters.AddWithValue("@mensualidadSoles", GetValueOrDefault(dataGridViewIngresos.Rows[1].Cells["soles"].Value));
+                    command.Parameters.AddWithValue("@mensualidadDolares", GetValueOrDefault(dataGridViewIngresos.Rows[1].Cells["dolares"].Value));
+                    command.Parameters.AddWithValue("@otrosSoles", GetValueOrDefault(dataGridViewIngresos.Rows[2].Cells["soles"].Value));
+                    command.Parameters.AddWithValue("@otrosDolares", GetValueOrDefault(dataGridViewIngresos.Rows[2].Cells["dolares"].Value));
+                    command.Parameters.AddWithValue("@totalDolares", GetValueOrDefault(dataGridViewIngresos.Rows[4].Cells["dolares"].Value));
+                    command.Parameters.AddWithValue("@totalSoles", GetValueOrDefault(dataGridViewIngresos.Rows[4].Cells["soles"].Value));
                     command.Parameters.AddWithValue("@numeroOrdenViaje", currentOrderId); // Asegurarse de usar currentOrderId aquí
+
+                    // Parámetros de descripciones
+                    command.Parameters.AddWithValue("@descDespacho", GetDescriptionValueOrDefault(dataGridViewIngresos.Rows[0].Cells["descripcion"].Value));
+                    command.Parameters.AddWithValue("@descMensualidad", GetDescriptionValueOrDefault(dataGridViewIngresos.Rows[1].Cells["descripcion"].Value));
+                    command.Parameters.AddWithValue("@descOtrosAutorizados", GetDescriptionValueOrDefault(dataGridViewIngresos.Rows[2].Cells["descripcion"].Value));
+                    command.Parameters.AddWithValue("@descPrestamo", GetDescriptionValueOrDefault(dataGridViewIngresos.Rows[3].Cells["descripcion"].Value));
 
                     command.ExecuteNonQuery();
                 }
@@ -585,12 +601,23 @@ namespace ORDENDEVIAJE
             MessageBox.Show("Datos de ingresos guardados exitosamente.");
         }
 
+        private object GetValueOrDefault(object value)
+        {
+            return value == DBNull.Value || value == null || string.IsNullOrEmpty(value.ToString()) ? 0 : Convert.ToSingle(value);
+        }
+
+        private object GetDescriptionValueOrDefault(object value)
+        {
+            return value == DBNull.Value || value == null ? DBNull.Value : value.ToString();
+        }
+
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
             SaveIngresos(); // Llamar al método para guardar los datos de ingresos
             SaveGastos();
-            
+            this.Hide();
+
         }
 
         private void SaveGastosAdicionales()
@@ -702,12 +729,6 @@ namespace ORDENDEVIAJE
         {
             return gridView.Rows[rowIndex].Cells[columnName].Value ?? DBNull.Value;
         }
-
-
-
-
-
-
 
     }
 }

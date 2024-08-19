@@ -59,6 +59,7 @@
             textBox5 = new TextBox();
             comboBox3 = new ComboBox();
             label16 = new Label();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // label1
@@ -82,6 +83,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.FloralWhite;
             label2.Location = new Point(28, 112);
             label2.Name = "label2";
             label2.Size = new Size(54, 20);
@@ -98,6 +100,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.FloralWhite;
             label3.Location = new Point(28, 198);
             label3.Name = "label3";
             label3.Size = new Size(116, 20);
@@ -115,6 +118,7 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.FloralWhite;
             label4.Location = new Point(368, 198);
             label4.Name = "label4";
             label4.Size = new Size(111, 20);
@@ -134,6 +138,7 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.FloralWhite;
             label5.Location = new Point(28, 238);
             label5.Name = "label5";
             label5.Size = new Size(128, 20);
@@ -151,6 +156,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.FloralWhite;
             label6.Location = new Point(368, 238);
             label6.Name = "label6";
             label6.Size = new Size(123, 20);
@@ -160,6 +166,7 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.BackColor = Color.FloralWhite;
             label7.Location = new Point(28, 276);
             label7.Name = "label7";
             label7.Size = new Size(58, 20);
@@ -178,6 +185,7 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.BackColor = Color.FloralWhite;
             label8.Location = new Point(28, 315);
             label8.Name = "label8";
             label8.Size = new Size(92, 20);
@@ -186,6 +194,7 @@
             // 
             // label9
             // 
+            label9.BackColor = Color.FloralWhite;
             label9.Location = new Point(0, 0);
             label9.Name = "label9";
             label9.Size = new Size(100, 23);
@@ -194,7 +203,8 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(169, 312);
+            comboBox2.Location = new Point(169, 315);
+            comboBox2.MaxDropDownItems = 5;
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(171, 28);
             comboBox2.TabIndex = 20;
@@ -202,6 +212,7 @@
             // label10
             // 
             label10.AutoSize = true;
+            label10.BackColor = Color.FloralWhite;
             label10.Location = new Point(368, 315);
             label10.Name = "label10";
             label10.Size = new Size(99, 20);
@@ -211,6 +222,7 @@
             // label11
             // 
             label11.AutoSize = true;
+            label11.BackColor = Color.FloralWhite;
             label11.Location = new Point(28, 367);
             label11.Name = "label11";
             label11.Size = new Size(81, 20);
@@ -230,6 +242,7 @@
             // label12
             // 
             label12.AutoSize = true;
+            label12.BackColor = Color.FloralWhite;
             label12.Location = new Point(28, 404);
             label12.Name = "label12";
             label12.Size = new Size(108, 20);
@@ -269,12 +282,13 @@
             comboBox4.FormattingEnabled = true;
             comboBox4.Location = new Point(169, 364);
             comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(171, 28);
+            comboBox4.Size = new Size(298, 28);
             comboBox4.TabIndex = 32;
             // 
             // label13
             // 
             label13.AutoSize = true;
+            label13.BackColor = Color.FloralWhite;
             label13.Font = new Font("Trebuchet MS", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label13.Location = new Point(301, 9);
             label13.Name = "label13";
@@ -285,6 +299,7 @@
             // label14
             // 
             label14.AutoSize = true;
+            label14.BackColor = Color.FloralWhite;
             label14.Location = new Point(368, 72);
             label14.Name = "label14";
             label14.Size = new Size(80, 20);
@@ -294,6 +309,7 @@
             // label15
             // 
             label15.AutoSize = true;
+            label15.BackColor = Color.FloralWhite;
             label15.Location = new Point(368, 112);
             label15.Name = "label15";
             label15.Size = new Size(111, 20);
@@ -325,17 +341,27 @@
             // label16
             // 
             label16.AutoSize = true;
+            label16.BackColor = Color.FloralWhite;
             label16.Location = new Point(28, 75);
             label16.Name = "label16";
             label16.Size = new Size(79, 20);
             label16.TabIndex = 39;
             label16.Text = "N° Pedido:";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FloralWhite;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(817, 604);
+            panel1.TabIndex = 40;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(813, 559);
+            ClientSize = new Size(813, 605);
+            Controls.Add(comboBox2);
             Controls.Add(label16);
             Controls.Add(comboBox3);
             Controls.Add(textBox5);
@@ -351,7 +377,6 @@
             Controls.Add(dateTimePicker2);
             Controls.Add(label11);
             Controls.Add(label10);
-            Controls.Add(comboBox2);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(comboBox1);
@@ -367,6 +392,7 @@
             Controls.Add(label2);
             Controls.Add(textBox1);
             Controls.Add(label1);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "Form2";
@@ -409,5 +435,6 @@
         public TextBox textBox5;
         private ComboBox comboBox3;
         private Label label16;
+        private Panel panel1;
     }
 }

@@ -8,6 +8,8 @@ namespace ORDENDEVIAJE
         private bool isInitialImage = true;
         public Login()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             InitializeComponent();
             textBox2.UseSystemPasswordChar = true;
 

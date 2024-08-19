@@ -42,13 +42,15 @@
             buttonGuardar = new Button();
             buttonSiguiente = new Button();
             dataGridView1 = new DataGridView();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(123, 9);
+            label1.BackColor = Color.FloralWhite;
+            label1.Location = new Point(199, 9);
             label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
             label1.Size = new Size(646, 24);
@@ -58,6 +60,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.FloralWhite;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(18, 70);
             label2.Name = "label2";
@@ -77,6 +80,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.FloralWhite;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(647, 70);
             label3.Name = "label3";
@@ -96,6 +100,7 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.FloralWhite;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(18, 110);
             label4.Name = "label4";
@@ -106,6 +111,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.FloralWhite;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.Location = new Point(18, 153);
             label6.Name = "label6";
@@ -160,7 +166,7 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.BackgroundColor = SystemColors.Control;
+            dataGridView1.BackgroundColor = Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -185,6 +191,14 @@
             dataGridView1.Size = new Size(1039, 126);
             dataGridView1.TabIndex = 15;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FloralWhite;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1091, 506);
+            panel1.TabIndex = 16;
+            // 
             // Form4
             // 
             AutoScaleDimensions = new SizeF(13F, 24F);
@@ -202,6 +216,7 @@
             Controls.Add(textBoxGuiaTransportista);
             Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(panel1);
             Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(5, 4, 5, 4);
@@ -234,5 +249,6 @@
         private DataGridViewTextBoxColumn descProducto;
         private Button buttonSiguiente;
         private DataGridView dataGridView1;
+        private Panel panel1;
     }
 }

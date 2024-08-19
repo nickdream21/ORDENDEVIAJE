@@ -13,10 +13,15 @@ namespace ORDENDEVIAJE
     public partial class Form5 : Form
     {
         private Form2 form2Instance;
+        private Form8 form8Instance;
+        private Form9 form9Instance;
+        private Form10 form10Instance;
+        private Form11 form11Instance;
         public Form5()
         {
             InitializeComponent();
             personalizarDiseño();
+            this.FormClosing += new FormClosingEventHandler(Form5_FormClosing);
         }
 
         private void personalizarDiseño()
@@ -87,6 +92,19 @@ namespace ORDENDEVIAJE
             // codificar que hace cuando presionemos click en el boton Buscar del menu orden de viaje
             // depues de todo eso invocamos el ocultar sub Menu
 
+
+            // Verificar si form2Instance ya está abierto
+            if (form11Instance == null || form11Instance.IsDisposed)
+            {
+                form11Instance = new Form11();
+                form11Instance.FormClosed += (s, args) => form11Instance = null;
+                form11Instance.Show();
+            }
+            else
+            {
+                form11Instance.BringToFront();
+            }
+
             ocultarSubMenu();
         }
 
@@ -99,24 +117,49 @@ namespace ORDENDEVIAJE
 
         private void buttonRegistroChoferes_Click(object sender, EventArgs e)
         {
-            // codificar que hace cuando presionemos click en el boton choferes del menu Registro
-            // depues de todo eso invocamos el ocultar sub Menu
+            if (form8Instance == null || form8Instance.IsDisposed)
+            {
+                form8Instance = new Form8();
+                form8Instance.FormClosed += (s, args) => form8Instance = null;
+                form8Instance.Show();
+            }
+            else
+            {
+                form8Instance.BringToFront();
+            }
 
             ocultarSubMenu();
+
         }
 
         private void buttonRegistroTractos_Click(object sender, EventArgs e)
         {
-            // codificar que hace cuando presionemos click en el boton tractos del menu Registro
-            // depues de todo eso invocamos el ocultar sub Menu
+            if (form9Instance == null || form9Instance.IsDisposed)
+            {
+                form9Instance = new Form9();
+                form9Instance.FormClosed += (s, args) => form9Instance = null;
+                form9Instance.Show();
+            }
+            else
+            {
+                form9Instance.BringToFront();
+            }
 
             ocultarSubMenu();
         }
 
         private void buttonRegistroCarretas_Click(object sender, EventArgs e)
         {
-            // codificar que hace cuando presionemos click en el boton carretas del menu Registro
-            // depues de todo eso invocamos el ocultar sub Menu
+            if (form10Instance == null || form10Instance.IsDisposed)
+            {
+                form10Instance = new Form10();
+                form10Instance.FormClosed += (s, args) => form10Instance = null;
+                form10Instance.Show();
+            }
+            else
+            {
+                form10Instance.BringToFront();
+            }
 
             ocultarSubMenu();
         }
@@ -143,7 +186,14 @@ namespace ORDENDEVIAJE
 
             ocultarSubMenu();
         }
-   
-   
+
+        private void Form5_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Cierra toda la aplicación cuando se cierra el Form5
+            Application.Exit();
+        }
+
+
+
     }
 }
