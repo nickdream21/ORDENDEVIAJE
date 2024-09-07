@@ -69,6 +69,7 @@ namespace ORDENDEVIAJE
             {
                 MessageBox.Show("Error al buscar la orden de viaje: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            this.Hide();
         }
     }
     }
