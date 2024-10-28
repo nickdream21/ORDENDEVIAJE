@@ -15,62 +15,59 @@
 
         private void InitializeComponent()
         {
-            this.textBoxNumManifiesto = new System.Windows.Forms.TextBox();
-            this.comboBoxPlantaDescarga = new System.Windows.Forms.ComboBox();
-            this.buttonGuardar = new System.Windows.Forms.Button();
-            this.buttonCancelar = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            textBoxNumManifiesto = new TextBox();
+            comboBoxPlantaDescarga = new ComboBox();
+            buttonGuardar = new Button();
+            buttonCancelar = new Button();
+            SuspendLayout();
             // 
             // textBoxNumManifiesto
             // 
-            this.textBoxNumManifiesto.Location = new System.Drawing.Point(150, 30);
-            this.textBoxNumManifiesto.Name = "textBoxNumManifiesto";
-            this.textBoxNumManifiesto.Size = new System.Drawing.Size(100, 22);
-            this.textBoxNumManifiesto.TabIndex = 0;
+            textBoxNumManifiesto.Location = new Point(279, 108);
+            textBoxNumManifiesto.Name = "textBoxNumManifiesto";
+            textBoxNumManifiesto.Size = new Size(100, 27);
+            textBoxNumManifiesto.TabIndex = 0;
             // 
             // comboBoxPlantaDescarga
             // 
-            this.comboBoxPlantaDescarga.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPlantaDescarga.FormattingEnabled = true;
-            this.comboBoxPlantaDescarga.Items.AddRange(new object[] {
-            "Planta 1",
-            "Planta 2",
-            "Planta 3"});
-            this.comboBoxPlantaDescarga.Location = new System.Drawing.Point(150, 70);
-            this.comboBoxPlantaDescarga.Name = "comboBoxPlantaDescarga";
-            this.comboBoxPlantaDescarga.Size = new System.Drawing.Size(100, 24);
-            this.comboBoxPlantaDescarga.TabIndex = 1;
+            comboBoxPlantaDescarga.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxPlantaDescarga.FormattingEnabled = true;
+            comboBoxPlantaDescarga.Items.AddRange(new object[] { "Planta 1", "Planta 2", "Planta 3" });
+            comboBoxPlantaDescarga.Location = new Point(150, 70);
+            comboBoxPlantaDescarga.Name = "comboBoxPlantaDescarga";
+            comboBoxPlantaDescarga.Size = new Size(100, 28);
+            comboBoxPlantaDescarga.TabIndex = 1;
             // 
             // buttonGuardar
             // 
-            this.buttonGuardar.Location = new System.Drawing.Point(50, 120);
-            this.buttonGuardar.Name = "buttonGuardar";
-            this.buttonGuardar.Size = new System.Drawing.Size(75, 23);
-            this.buttonGuardar.TabIndex = 2;
-            this.buttonGuardar.Text = "Guardar";
-            this.buttonGuardar.UseVisualStyleBackColor = true;
-            this.buttonGuardar.Click += new System.EventHandler(this.buttonGuardar_Click);
+            buttonGuardar.Location = new Point(113, 236);
+            buttonGuardar.Name = "buttonGuardar";
+            buttonGuardar.Size = new Size(75, 23);
+            buttonGuardar.TabIndex = 2;
+            buttonGuardar.Text = "Guardar";
+            buttonGuardar.UseVisualStyleBackColor = true;
+            buttonGuardar.Click += buttonGuardar_Click;
             // 
             // buttonCancelar
             // 
-            this.buttonCancelar.Location = new System.Drawing.Point(175, 120);
-            this.buttonCancelar.Name = "buttonCancelar";
-            this.buttonCancelar.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancelar.TabIndex = 3;
-            this.buttonCancelar.Text = "Cancelar";
-            this.buttonCancelar.UseVisualStyleBackColor = true;
-            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
+            buttonCancelar.Location = new Point(304, 259);
+            buttonCancelar.Name = "buttonCancelar";
+            buttonCancelar.Size = new Size(75, 23);
+            buttonCancelar.TabIndex = 3;
+            buttonCancelar.Text = "Cancelar";
+            buttonCancelar.UseVisualStyleBackColor = true;
+            buttonCancelar.Click += buttonCancelar_Click;
             // 
             // Form6
             // 
-            this.ClientSize = new System.Drawing.Size(300, 180);
-            this.Controls.Add(this.buttonCancelar);
-            this.Controls.Add(this.buttonGuardar);
-            this.Controls.Add(this.comboBoxPlantaDescarga);
-            this.Controls.Add(this.textBoxNumManifiesto);
-            this.Name = "Form6";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            ClientSize = new Size(541, 378);
+            Controls.Add(buttonCancelar);
+            Controls.Add(buttonGuardar);
+            Controls.Add(comboBoxPlantaDescarga);
+            Controls.Add(textBoxNumManifiesto);
+            Name = "Form6";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         private System.Windows.Forms.TextBox textBoxNumManifiesto;

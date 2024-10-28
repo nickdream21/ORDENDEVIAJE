@@ -17,6 +17,9 @@ namespace ORDENDEVIAJE
         private Form9 form9Instance;
         private Form10 form10Instance;
         private Form11 form11Instance;
+        private Form15 formFacturaInstance; // Para formulario Factura
+        private Form14 formCPICInstance; // Para formulario CPIC
+
         public Form5()
         {
             InitializeComponent();
@@ -29,10 +32,11 @@ namespace ORDENDEVIAJE
             panelSubMenuOrdenViaje.Visible = false;
             panelSubMenuRegistro.Visible = false;
             panelSubMenuConsultas.Visible = false;
-            //se puede añadir otras formas para personalizar el diseño
 
+            // Añadir los paneles ocultos para Factura y CPIC
+            panelSubMenuFactura.Visible = false;
+            panelSubMenuCPIC.Visible = false;
         }
-
 
         private void ocultarSubMenu()
         {
@@ -43,8 +47,12 @@ namespace ORDENDEVIAJE
             if (panelSubMenuConsultas.Visible == true)
                 panelSubMenuConsultas.Visible = false;
 
+            // Ocultar también los nuevos submenús
+            if (panelSubMenuFactura.Visible == true)
+                panelSubMenuFactura.Visible = false;
+            if (panelSubMenuCPIC.Visible == true)
+                panelSubMenuCPIC.Visible = false;
         }
-
 
         private void mostrarSubMenu(Panel subMenu)
         {
@@ -59,19 +67,14 @@ namespace ORDENDEVIAJE
             }
         }
 
-        // region subMenuOrdenDeViaje
-
+        // SUBMENÚ ORDEN DE VIAJE
         private void botonOrdenViaje_Click(object sender, EventArgs e)
         {
             mostrarSubMenu(panelSubMenuOrdenViaje);
-
-
         }
 
         private void buttonAgregarOrdenViaje_Click(object sender, EventArgs e)
         {
-
-            // Verificar si form2Instance ya está abierto
             if (form2Instance == null || form2Instance.IsDisposed)
             {
                 form2Instance = new Form2();
@@ -84,16 +87,10 @@ namespace ORDENDEVIAJE
             }
 
             ocultarSubMenu();
-
         }
 
         private void buttonBuscarOrdenViaje_Click(object sender, EventArgs e)
         {
-            // codificar que hace cuando presionemos click en el boton Buscar del menu orden de viaje
-            // depues de todo eso invocamos el ocultar sub Menu
-
-
-            // Verificar si form2Instance ya está abierto
             if (form11Instance == null || form11Instance.IsDisposed)
             {
                 form11Instance = new Form11();
@@ -108,8 +105,7 @@ namespace ORDENDEVIAJE
             ocultarSubMenu();
         }
 
-
-        //SUB MENU REGISTRO
+        // SUBMENÚ REGISTRO
         private void buttonRegistro_Click(object sender, EventArgs e)
         {
             mostrarSubMenu(panelSubMenuRegistro);
@@ -129,7 +125,6 @@ namespace ORDENDEVIAJE
             }
 
             ocultarSubMenu();
-
         }
 
         private void buttonRegistroTractos_Click(object sender, EventArgs e)
@@ -164,8 +159,48 @@ namespace ORDENDEVIAJE
             ocultarSubMenu();
         }
 
+        // SUBMENÚ FACTURA
+        private void buttonFactura_Click(object sender, EventArgs e)
+        {
+            mostrarSubMenu(panelSubMenuFactura);
+        }
 
-        //SUB MENU CONSULTAS
+        /*  private void buttonAgregarFactura_Click(object sender, EventArgs e)
+          {
+              if (formFacturaInstance == null || formFacturaInstance.IsDisposed)
+              {
+                  formFacturaInstance = new Form12(); // Formulario para Factura
+                  formFacturaInstance.FormClosed += (s, args) => formFacturaInstance = null;
+                  formFacturaInstance.Show();
+              }
+              else
+              {
+                  formFacturaInstance.BringToFront();
+              }
+
+              ocultarSubMenu();
+          }*/
+
+        private void buttonBuscarFactura_Click(object sender, EventArgs e)
+        {
+            // Aquí iría la lógica para buscar Facturas
+            ocultarSubMenu();
+        }
+
+        // SUBMENÚ CPIC
+        private void buttonCPIC_Click(object sender, EventArgs e)
+        {
+            mostrarSubMenu(panelSubMenuCPIC);
+        }
+
+
+        private void buttonBuscarCPIC_Click(object sender, EventArgs e)
+        {
+            // Aquí iría la lógica para buscar CPIC
+            ocultarSubMenu();
+        }
+
+        // SUBMENÚ CONSULTAS
         private void buttonConsultas_Click(object sender, EventArgs e)
         {
             mostrarSubMenu(panelSubMenuConsultas);
@@ -173,17 +208,13 @@ namespace ORDENDEVIAJE
 
         private void buttonConsultasGastos_Click(object sender, EventArgs e)
         {
-            // codificar que hace cuando presionemos click en el boton gastos del menu Consultas
-            // depues de todo eso invocamos el ocultar sub Menu
-
+            // Lógica para consultar Gastos
             ocultarSubMenu();
         }
 
         private void buttonConsultasAlmacen_Click(object sender, EventArgs e)
         {
-            // codificar que hace cuando presionemos click en el boton almacen del menu Consultas
-            // depues de todo eso invocamos el ocultar sub Menu
-
+            // Lógica para consultar Almacén
             ocultarSubMenu();
         }
 
@@ -193,7 +224,36 @@ namespace ORDENDEVIAJE
             Application.Exit();
         }
 
+        private void buttonAgregarCPIC_Click_1(object sender, EventArgs e)
+        {
+            if (formCPICInstance == null || formCPICInstance.IsDisposed)
+            {
+                formCPICInstance = new Form14(); // Formulario para CPIC
+                formCPICInstance.FormClosed += (s, args) => formCPICInstance = null;
+                formCPICInstance.Show();
+            }
+            else
+            {
+                formCPICInstance.BringToFront();
+            }
 
+            ocultarSubMenu();
+        }
 
+        private void buttonAgregarFactura_Click(object sender, EventArgs e)
+        {
+            if (formCPICInstance == null || formCPICInstance.IsDisposed)
+            {
+                formFacturaInstance = new Form15(); // Formulario para CPIC
+                formFacturaInstance.FormClosed += (s, args) => formFacturaInstance = null;
+                formFacturaInstance.Show();
+            }
+            else
+            {
+                formFacturaInstance.BringToFront();
+            }
+
+            ocultarSubMenu();
+        }
     }
 }

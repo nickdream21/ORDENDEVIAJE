@@ -26,10 +26,16 @@ namespace ORDENDEVIAJE
         public Form2()
         {
             InitializeComponent();
-            dateTimePicker3.Format = DateTimePickerFormat.Time;
-            dateTimePicker3.ShowUpDown = true;
-            dateTimePicker2 = new DateTimePicker();
-            dateTimePicker2.ShowUpDown = true;
+            // Configuración del formato de los DateTimePickers para mostrar solo horas y minutos
+            dateTimePicker3.Format = DateTimePickerFormat.Custom;
+            dateTimePicker3.CustomFormat = "HH:mm";  // Solo horas y minutos
+            dateTimePicker3.ShowUpDown = true;  // Permite seleccionar solo horas y minutos
+
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.CustomFormat = "HH:mm";  // Solo horas y minutos
+            dateTimePicker2.ShowUpDown = true;  // Permite seleccionar solo horas y minutos
+
+
             this.StartPosition = FormStartPosition.CenterScreen;
 
             buttonContinuar.Enabled = false;
@@ -50,19 +56,12 @@ namespace ORDENDEVIAJE
 
         private void ConfigureComboBox(ComboBox comboBox)
         {
-            comboBox.AutoCompleteMode = AutoCompleteMode.None;
-            comboBox.AutoCompleteSource = AutoCompleteSource.None;
-            comboBox.DropDownStyle = ComboBoxStyle.DropDownList; // Cambiar a DropDownList
-            comboBox.MaxDropDownItems = 10;
-            if (comboBox == comboBox1)
-                comboBox.TextUpdate += ComboBox1_TextUpdate;
-            else if (comboBox == comboBox2)
-                comboBox.TextUpdate += ComboBox2_TextUpdate;
-            else if (comboBox == comboBox3)
-                comboBox.TextUpdate += ComboBox3_TextUpdate;
-            else if (comboBox == comboBox4)
-                comboBox.TextUpdate += ComboBox4_TextUpdate;
+            comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;  // Sugerir opciones mientras se escribe
+            comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;  // Utilizar los ítems para autocompletar
+            comboBox.DropDownStyle = ComboBoxStyle.DropDown;  // Permitir que se pueda escribir
+            comboBox.MaxDropDownItems = 10;  // Limitar el número de ítems mostrados
         }
+
 
         private void LoadClientes()
         {
@@ -179,21 +178,25 @@ namespace ORDENDEVIAJE
 
             string searchText = comboBox.Text;
 
+            // Filtrar los elementos según el texto ingresado
             var filteredItems = dataTable.AsEnumerable()
                 .Where(row => row.Field<string>(columnName).StartsWith(searchText, StringComparison.OrdinalIgnoreCase));
 
             if (filteredItems.Any())
             {
                 DataTable filteredDataTable = filteredItems.CopyToDataTable();
-                comboBox.DataSource = null;
-                comboBox.Items.Clear();
-                foreach (DataRow row in filteredDataTable.Rows)
-                {
-                    comboBox.Items.Add(row[columnName].ToString());
-                }
+
+                // Actualizar el DataSource sin eliminar el anterior
+                comboBox.DataSource = filteredDataTable;
+                comboBox.DisplayMember = columnName;
+                comboBox.ValueMember = dataTable.Columns[0].ColumnName;
+
+                // Mantener el texto ingresado por el usuario
                 comboBox.Text = searchText;
                 comboBox.SelectionStart = searchText.Length;
                 comboBox.SelectionLength = 0;
+
+                // Mostrar la lista desplegable
                 comboBox.DroppedDown = true;
                 Cursor.Current = Cursors.Default;
             }
@@ -202,6 +205,7 @@ namespace ORDENDEVIAJE
                 comboBox.DroppedDown = false;
             }
         }
+
 
         private void LoadCarretas()
         {

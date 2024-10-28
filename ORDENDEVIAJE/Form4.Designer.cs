@@ -28,22 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             label1 = new Label();
             label2 = new Label();
             textBoxGuiaTransportista = new TextBox();
             label3 = new Label();
             textBoxGuiaCliente = new TextBox();
             label4 = new Label();
-            label6 = new Label();
-            textBoxDescripcionProducto = new TextBox();
             buttonElegir = new Button();
             buttonGuardar = new Button();
             buttonSiguiente = new Button();
             dataGridView1 = new DataGridView();
             panel1 = new Panel();
+            dataGridView2 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -108,26 +107,6 @@
             label4.TabIndex = 5;
             label4.Text = "Ruta:";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.FloralWhite;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(18, 153);
-            label6.Name = "label6";
-            label6.Size = new Size(175, 20);
-            label6.TabIndex = 9;
-            label6.Text = "Descripcion de Producto:";
-            // 
-            // textBoxDescripcionProducto
-            // 
-            textBoxDescripcionProducto.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxDescripcionProducto.Location = new Point(203, 147);
-            textBoxDescripcionProducto.Multiline = true;
-            textBoxDescripcionProducto.Name = "textBoxDescripcionProducto";
-            textBoxDescripcionProducto.Size = new Size(228, 34);
-            textBoxDescripcionProducto.TabIndex = 10;
-            // 
             // buttonElegir
             // 
             buttonElegir.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -142,7 +121,7 @@
             // buttonGuardar
             // 
             buttonGuardar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonGuardar.Location = new Point(18, 217);
+            buttonGuardar.Location = new Point(37, 439);
             buttonGuardar.Name = "buttonGuardar";
             buttonGuardar.Size = new Size(94, 29);
             buttonGuardar.TabIndex = 13;
@@ -153,7 +132,7 @@
             // buttonSiguiente
             // 
             buttonSiguiente.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonSiguiente.Location = new Point(980, 460);
+            buttonSiguiente.Location = new Point(951, 664);
             buttonSiguiente.Name = "buttonSiguiente";
             buttonSiguiente.Size = new Size(94, 29);
             buttonSiguiente.TabIndex = 14;
@@ -167,24 +146,8 @@
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.BackgroundColor = Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Location = new Point(18, 273);
+            dataGridView1.Location = new Point(18, 508);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
@@ -194,22 +157,30 @@
             // panel1
             // 
             panel1.BackColor = Color.FloralWhite;
-            panel1.Location = new Point(0, 0);
+            panel1.Controls.Add(dataGridView1);
+            panel1.Controls.Add(dataGridView2);
+            panel1.Controls.Add(buttonSiguiente);
+            panel1.Controls.Add(buttonGuardar);
+            panel1.Location = new Point(0, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1091, 506);
+            panel1.Size = new Size(1091, 1163);
             panel1.TabIndex = 16;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(37, 214);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.Size = new Size(976, 188);
+            dataGridView2.TabIndex = 0;
             // 
             // Form4
             // 
             AutoScaleDimensions = new SizeF(13F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1091, 501);
-            Controls.Add(dataGridView1);
-            Controls.Add(buttonSiguiente);
-            Controls.Add(buttonGuardar);
+            ClientSize = new Size(1091, 766);
             Controls.Add(buttonElegir);
-            Controls.Add(textBoxDescripcionProducto);
-            Controls.Add(label6);
             Controls.Add(label4);
             Controls.Add(textBoxGuiaCliente);
             Controls.Add(label3);
@@ -224,6 +195,8 @@
             Name = "Form4";
             Text = "Form4";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -236,8 +209,6 @@
         private Label label3;
         private TextBox textBoxGuiaCliente;
         private Label label4;
-        private Label label6;
-        private TextBox textBoxDescripcionProducto;
         private Button buttonElegir;
         private Button buttonGuardar;
         private DataGridViewTextBoxColumn guiaTransportista;
@@ -250,5 +221,6 @@
         private Button buttonSiguiente;
         private DataGridView dataGridView1;
         private Panel panel1;
+        private DataGridView dataGridView2;
     }
 }

@@ -176,7 +176,6 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "VITAPRO" });
             comboBox1.Location = new Point(169, 273);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(171, 28);
@@ -282,7 +281,7 @@
             comboBox4.FormattingEnabled = true;
             comboBox4.Location = new Point(169, 364);
             comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(298, 28);
+            comboBox4.Size = new Size(346, 28);
             comboBox4.TabIndex = 32;
             // 
             // label13

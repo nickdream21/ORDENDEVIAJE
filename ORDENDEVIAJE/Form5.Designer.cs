@@ -44,6 +44,14 @@
             buttonBuscarOrdenViaje = new Button();
             buttonAgregarOrdenViaje = new Button();
             botonOrdenViaje = new Button();
+            panelSubMenuFactura = new Panel();
+            buttonAgregarFactura = new Button();
+            buttonBuscarFactura = new Button();
+            buttonFactura = new Button();
+            panelSubMenuCPIC = new Panel();
+            buttonAgregarCPIC = new Button();
+            buttonBuscarCPIC = new Button();
+            buttonCPIC = new Button();
             panelLogo = new Panel();
             pictureBox2 = new PictureBox();
             panelContenedor = new Panel();
@@ -52,6 +60,8 @@
             panelSubMenuConsultas.SuspendLayout();
             panelSubMenuRegistro.SuspendLayout();
             panelSubMenuOrdenViaje.SuspendLayout();
+            panelSubMenuFactura.SuspendLayout();
+            panelSubMenuCPIC.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelContenedor.SuspendLayout();
@@ -69,6 +79,10 @@
             panelMenuLateral.Controls.Add(buttonRegistro);
             panelMenuLateral.Controls.Add(panelSubMenuOrdenViaje);
             panelMenuLateral.Controls.Add(botonOrdenViaje);
+            panelMenuLateral.Controls.Add(panelSubMenuFactura);
+            panelMenuLateral.Controls.Add(buttonFactura);
+            panelMenuLateral.Controls.Add(panelSubMenuCPIC);
+            panelMenuLateral.Controls.Add(buttonCPIC);
             panelMenuLateral.Controls.Add(panelLogo);
             panelMenuLateral.Dock = DockStyle.Left;
             panelMenuLateral.Location = new Point(0, 0);
@@ -84,7 +98,7 @@
             buttonSalir.FlatAppearance.MouseDownBackColor = Color.White;
             buttonSalir.FlatAppearance.MouseOverBackColor = Color.White;
             buttonSalir.FlatStyle = FlatStyle.Flat;
-            buttonSalir.Location = new Point(0, 721);
+            buttonSalir.Location = new Point(0, 1071);
             buttonSalir.Name = "buttonSalir";
             buttonSalir.Padding = new Padding(10, 0, 0, 0);
             buttonSalir.Size = new Size(280, 60);
@@ -99,7 +113,7 @@
             panelSubMenuConsultas.Controls.Add(buttonConsultasAlmacen);
             panelSubMenuConsultas.Controls.Add(buttonConsultasGastos);
             panelSubMenuConsultas.Dock = DockStyle.Top;
-            panelSubMenuConsultas.Location = new Point(0, 606);
+            panelSubMenuConsultas.Location = new Point(0, 956);
             panelSubMenuConsultas.Name = "panelSubMenuConsultas";
             panelSubMenuConsultas.Size = new Size(280, 115);
             panelSubMenuConsultas.TabIndex = 5;
@@ -149,7 +163,7 @@
             buttonConsultas.FlatAppearance.MouseDownBackColor = Color.White;
             buttonConsultas.FlatAppearance.MouseOverBackColor = Color.White;
             buttonConsultas.FlatStyle = FlatStyle.Flat;
-            buttonConsultas.Location = new Point(0, 546);
+            buttonConsultas.Location = new Point(0, 896);
             buttonConsultas.Name = "buttonConsultas";
             buttonConsultas.Padding = new Padding(10, 0, 0, 0);
             buttonConsultas.Size = new Size(280, 60);
@@ -166,7 +180,7 @@
             panelSubMenuRegistro.Controls.Add(buttonRegistroTractos);
             panelSubMenuRegistro.Controls.Add(buttonRegistroChoferes);
             panelSubMenuRegistro.Dock = DockStyle.Top;
-            panelSubMenuRegistro.Location = new Point(0, 375);
+            panelSubMenuRegistro.Location = new Point(0, 725);
             panelSubMenuRegistro.Name = "panelSubMenuRegistro";
             panelSubMenuRegistro.Size = new Size(280, 171);
             panelSubMenuRegistro.TabIndex = 3;
@@ -234,7 +248,7 @@
             buttonRegistro.FlatAppearance.MouseDownBackColor = Color.White;
             buttonRegistro.FlatAppearance.MouseOverBackColor = Color.White;
             buttonRegistro.FlatStyle = FlatStyle.Flat;
-            buttonRegistro.Location = new Point(0, 315);
+            buttonRegistro.Location = new Point(0, 665);
             buttonRegistro.Name = "buttonRegistro";
             buttonRegistro.Padding = new Padding(10, 0, 0, 0);
             buttonRegistro.Size = new Size(280, 60);
@@ -250,7 +264,7 @@
             panelSubMenuOrdenViaje.Controls.Add(buttonBuscarOrdenViaje);
             panelSubMenuOrdenViaje.Controls.Add(buttonAgregarOrdenViaje);
             panelSubMenuOrdenViaje.Dock = DockStyle.Top;
-            panelSubMenuOrdenViaje.Location = new Point(0, 200);
+            panelSubMenuOrdenViaje.Location = new Point(0, 550);
             panelSubMenuOrdenViaje.Name = "panelSubMenuOrdenViaje";
             panelSubMenuOrdenViaje.Size = new Size(280, 115);
             panelSubMenuOrdenViaje.TabIndex = 1;
@@ -302,7 +316,7 @@
             botonOrdenViaje.FlatStyle = FlatStyle.Flat;
             botonOrdenViaje.ForeColor = Color.Black;
             botonOrdenViaje.ImageAlign = ContentAlignment.MiddleLeft;
-            botonOrdenViaje.Location = new Point(0, 140);
+            botonOrdenViaje.Location = new Point(0, 490);
             botonOrdenViaje.Name = "botonOrdenViaje";
             botonOrdenViaje.Padding = new Padding(10, 0, 0, 0);
             botonOrdenViaje.Size = new Size(280, 60);
@@ -311,6 +325,122 @@
             botonOrdenViaje.TextAlign = ContentAlignment.MiddleLeft;
             botonOrdenViaje.UseVisualStyleBackColor = false;
             botonOrdenViaje.Click += botonOrdenViaje_Click;
+            // 
+            // panelSubMenuFactura
+            // 
+            panelSubMenuFactura.BackColor = Color.Linen;
+            panelSubMenuFactura.Controls.Add(buttonAgregarFactura);
+            panelSubMenuFactura.Controls.Add(buttonBuscarFactura);
+            panelSubMenuFactura.Dock = DockStyle.Top;
+            panelSubMenuFactura.Location = new Point(0, 375);
+            panelSubMenuFactura.Name = "panelSubMenuFactura";
+            panelSubMenuFactura.Size = new Size(280, 115);
+            panelSubMenuFactura.TabIndex = 7;
+            // 
+            // buttonAgregarFactura
+            // 
+            buttonAgregarFactura.BackColor = Color.Transparent;
+            buttonAgregarFactura.Dock = DockStyle.Top;
+            buttonAgregarFactura.FlatAppearance.BorderSize = 0;
+            buttonAgregarFactura.FlatStyle = FlatStyle.Flat;
+            buttonAgregarFactura.Location = new Point(0, 50);
+            buttonAgregarFactura.Name = "buttonAgregarFactura";
+            buttonAgregarFactura.Padding = new Padding(35, 0, 0, 0);
+            buttonAgregarFactura.Size = new Size(280, 50);
+            buttonAgregarFactura.TabIndex = 1;
+            buttonAgregarFactura.Text = "Agregar Factura";
+            buttonAgregarFactura.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAgregarFactura.UseVisualStyleBackColor = false;
+            buttonAgregarFactura.Click += buttonAgregarFactura_Click;
+            // 
+            // buttonBuscarFactura
+            // 
+            buttonBuscarFactura.BackColor = Color.Transparent;
+            buttonBuscarFactura.Dock = DockStyle.Top;
+            buttonBuscarFactura.FlatAppearance.BorderSize = 0;
+            buttonBuscarFactura.FlatStyle = FlatStyle.Flat;
+            buttonBuscarFactura.Location = new Point(0, 0);
+            buttonBuscarFactura.Name = "buttonBuscarFactura";
+            buttonBuscarFactura.Padding = new Padding(35, 0, 0, 0);
+            buttonBuscarFactura.Size = new Size(280, 50);
+            buttonBuscarFactura.TabIndex = 2;
+            buttonBuscarFactura.Text = "Buscar Factura";
+            buttonBuscarFactura.TextAlign = ContentAlignment.MiddleLeft;
+            buttonBuscarFactura.UseVisualStyleBackColor = false;
+            // 
+            // buttonFactura
+            // 
+            buttonFactura.BackColor = Color.Transparent;
+            buttonFactura.Dock = DockStyle.Top;
+            buttonFactura.FlatAppearance.BorderSize = 0;
+            buttonFactura.FlatStyle = FlatStyle.Flat;
+            buttonFactura.Location = new Point(0, 315);
+            buttonFactura.Name = "buttonFactura";
+            buttonFactura.Padding = new Padding(10, 0, 0, 0);
+            buttonFactura.Size = new Size(280, 60);
+            buttonFactura.TabIndex = 6;
+            buttonFactura.Text = "Factura";
+            buttonFactura.TextAlign = ContentAlignment.MiddleLeft;
+            buttonFactura.UseVisualStyleBackColor = false;
+            buttonFactura.Click += buttonFactura_Click;
+            // 
+            // panelSubMenuCPIC
+            // 
+            panelSubMenuCPIC.BackColor = Color.Linen;
+            panelSubMenuCPIC.Controls.Add(buttonAgregarCPIC);
+            panelSubMenuCPIC.Controls.Add(buttonBuscarCPIC);
+            panelSubMenuCPIC.Dock = DockStyle.Top;
+            panelSubMenuCPIC.Location = new Point(0, 200);
+            panelSubMenuCPIC.Name = "panelSubMenuCPIC";
+            panelSubMenuCPIC.Size = new Size(280, 115);
+            panelSubMenuCPIC.TabIndex = 8;
+            // 
+            // buttonAgregarCPIC
+            // 
+            buttonAgregarCPIC.BackColor = Color.Transparent;
+            buttonAgregarCPIC.Dock = DockStyle.Top;
+            buttonAgregarCPIC.FlatAppearance.BorderSize = 0;
+            buttonAgregarCPIC.FlatStyle = FlatStyle.Flat;
+            buttonAgregarCPIC.Location = new Point(0, 50);
+            buttonAgregarCPIC.Name = "buttonAgregarCPIC";
+            buttonAgregarCPIC.Padding = new Padding(35, 0, 0, 0);
+            buttonAgregarCPIC.Size = new Size(280, 50);
+            buttonAgregarCPIC.TabIndex = 1;
+            buttonAgregarCPIC.Text = "Agregar CPIC";
+            buttonAgregarCPIC.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAgregarCPIC.UseVisualStyleBackColor = false;
+            buttonAgregarCPIC.Click += buttonAgregarCPIC_Click_1;
+            // 
+            // buttonBuscarCPIC
+            // 
+            buttonBuscarCPIC.BackColor = Color.Transparent;
+            buttonBuscarCPIC.Dock = DockStyle.Top;
+            buttonBuscarCPIC.FlatAppearance.BorderSize = 0;
+            buttonBuscarCPIC.FlatStyle = FlatStyle.Flat;
+            buttonBuscarCPIC.Location = new Point(0, 0);
+            buttonBuscarCPIC.Name = "buttonBuscarCPIC";
+            buttonBuscarCPIC.Padding = new Padding(35, 0, 0, 0);
+            buttonBuscarCPIC.Size = new Size(280, 50);
+            buttonBuscarCPIC.TabIndex = 2;
+            buttonBuscarCPIC.Text = "Buscar CPIC";
+            buttonBuscarCPIC.TextAlign = ContentAlignment.MiddleLeft;
+            buttonBuscarCPIC.UseVisualStyleBackColor = false;
+            // 
+            // buttonCPIC
+            // 
+            buttonCPIC.BackColor = Color.Transparent;
+            buttonCPIC.Dock = DockStyle.Top;
+            buttonCPIC.FlatAppearance.BorderSize = 0;
+            buttonCPIC.FlatStyle = FlatStyle.Flat;
+            buttonCPIC.Location = new Point(0, 140);
+            buttonCPIC.Name = "buttonCPIC";
+            buttonCPIC.Padding = new Padding(10, 0, 0, 0);
+            buttonCPIC.Size = new Size(280, 60);
+            buttonCPIC.TabIndex = 8;
+            buttonCPIC.Text = "CPIC";
+            buttonCPIC.TextAlign = ContentAlignment.MiddleLeft;
+            buttonCPIC.UseVisualStyleBackColor = false;
+            buttonCPIC.Click += buttonCPIC_Click;
             // 
             // panelLogo
             // 
@@ -367,6 +497,8 @@
             panelSubMenuConsultas.ResumeLayout(false);
             panelSubMenuRegistro.ResumeLayout(false);
             panelSubMenuOrdenViaje.ResumeLayout(false);
+            panelSubMenuFactura.ResumeLayout(false);
+            panelSubMenuCPIC.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
             panelLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -397,5 +529,17 @@
         private Panel panelContenedor;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+
+        // Nuevos controles para Factura
+        private Panel panelSubMenuFactura;
+        private Button buttonAgregarFactura;
+        private Button buttonBuscarFactura;
+        private Button buttonFactura;
+
+        // Nuevos controles para CPIC
+        private Panel panelSubMenuCPIC;
+        private Button buttonAgregarCPIC;
+        private Button buttonBuscarCPIC;
+        private Button buttonCPIC;
     }
 }
