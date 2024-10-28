@@ -23,6 +23,8 @@ namespace ORDENDEVIAJE
             // Conectar el evento CellValueChanged al método
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
 
+            // Conectar el evento TextChanged de txtNumeroFactura al método
+            txtNumeroFactura.TextChanged += TxtNumeroFactura_TextChanged;
         }
 
         private void InitializeDataGridView1()
@@ -133,6 +135,7 @@ namespace ORDENDEVIAJE
         }
 
         // Evento para validar y formatear el número de factura
+        // Evento para validar y formatear el número de factura
         private void TxtNumeroFactura_TextChanged(object sender, EventArgs e)
         {
             // Convertir el texto a mayúsculas y eliminar espacios adicionales en los extremos
@@ -152,6 +155,7 @@ namespace ORDENDEVIAJE
                 txtNumeroFactura.TextChanged += TxtNumeroFactura_TextChanged; // Reasignar el evento
             }
         }
+
 
         private DataTable GetProductList()
         {
@@ -277,6 +281,9 @@ namespace ORDENDEVIAJE
 
         private void GuardarCPIC()
         {
+            // Finaliza la edición de cualquier celda en el DataGridView que esté siendo editada
+            dataGridView1.EndEdit();
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -284,6 +291,14 @@ namespace ORDENDEVIAJE
 
                 try
                 {
+                    // Verificar si el N° CPIC ya existe en la base de datos
+                    if (ExisteCPIC(txtNumeroCPIC.Text, connection, transaction))
+                    {
+                        MessageBox.Show("El N° CPIC ingresado ya existe. Por favor, ingrese un N° CPIC diferente.",
+                                        "N° CPIC Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Detener el proceso si ya existe el CPIC
+                    }
+
                     // Buscar el idFactura basado en el numeroFactura ingresado
                     int? idFactura = ObtenerIdFactura(txtNumeroFactura.Text, connection, transaction);
 
@@ -293,13 +308,13 @@ namespace ORDENDEVIAJE
                         return;
                     }
 
-                    // Insertar el CPIC principal
+                    // Insertar el CPIC principal (sin columna de cantidad de bolsas)
                     string queryCPIC = "INSERT INTO CPIC (numeroCPIC, idFactura, valorTotalFlete, fechaEmision) OUTPUT INSERTED.idCPIC VALUES (@numeroCPIC, @idFactura, @valorTotalFlete, @fechaEmision)";
 
                     using (SqlCommand command = new SqlCommand(queryCPIC, connection, transaction))
                     {
                         command.Parameters.AddWithValue("@numeroCPIC", txtNumeroCPIC.Text);
-                        command.Parameters.AddWithValue("@idFactura", idFactura); // Ahora usamos el idFactura obtenido
+                        command.Parameters.AddWithValue("@idFactura", idFactura);
                         command.Parameters.AddWithValue("@valorTotalFlete", decimal.Parse(txtValorFlete.Text));
                         command.Parameters.AddWithValue("@fechaEmision", dtpFechaEmision.Value);
 
@@ -320,6 +335,18 @@ namespace ORDENDEVIAJE
                     transaction.Rollback();
                     MessageBox.Show("Error al guardar CPIC: " + ex.Message);
                 }
+            }
+        }
+
+        // Método para verificar si un N° CPIC ya existe en la base de datos
+        private bool ExisteCPIC(string numeroCPIC, SqlConnection connection, SqlTransaction transaction)
+        {
+            string query = "SELECT COUNT(1) FROM CPIC WHERE numeroCPIC = @numeroCPIC";
+            using (SqlCommand command = new SqlCommand(query, connection, transaction))
+            {
+                command.Parameters.AddWithValue("@numeroCPIC", numeroCPIC);
+                int count = (int)command.ExecuteScalar();
+                return count > 0;
             }
         }
 
@@ -345,7 +372,7 @@ namespace ORDENDEVIAJE
 
         private void InsertarProductos(int idCPIC, SqlConnection connection, SqlTransaction transaction)
         {
-            string queryProducto = "INSERT INTO CPIC_Productos (idCPIC, idProducto, cantidadBolsas) VALUES (@idCPIC, @idProducto, @cantidadBolsas)";
+            string queryProducto = "INSERT INTO CPIC_Productos (idCPIC, idProducto, cantidadBolsasProducto) VALUES (@idCPIC, @idProducto, @cantidadBolsasProducto)";
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -363,9 +390,11 @@ namespace ORDENDEVIAJE
                             int idProducto = ObtenerIdProducto(producto, connection, transaction);
                             cmdProducto.Parameters.AddWithValue("@idCPIC", idCPIC);
                             cmdProducto.Parameters.AddWithValue("@idProducto", idProducto);
-                            cmdProducto.Parameters.AddWithValue("@cantidadBolsas", cantidadBolsas);
 
-                            // Mensaje de depuración para verificar valores antes de insertar
+                            // Aquí se asegura de que cantidadBolsas siempre tiene un valor válido
+                            cmdProducto.Parameters.AddWithValue("@cantidadBolsasProducto", cantidadBolsas);
+
+                            // Debug para verificar los valores antes de insertar
                             Debug.WriteLine($"Insertando producto: ID Producto = {idProducto}, Cantidad Bolsas = {cantidadBolsas}");
 
                             cmdProducto.ExecuteNonQuery();
@@ -389,15 +418,19 @@ namespace ORDENDEVIAJE
         }
 
 
+
+
+
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["Bolsas"].Index && e.RowIndex >= 0)
             {
+                // Verificar si el valor en la celda es nulo o no válido
                 string valor = dataGridView1.Rows[e.RowIndex].Cells["Bolsas"].Value?.ToString().Trim();
-                if (string.IsNullOrWhiteSpace(valor) || !int.TryParse(valor, out int resultado) || resultado <= 0)
+                if (string.IsNullOrWhiteSpace(valor) || !int.TryParse(valor, out int cantidad))
                 {
-                    MessageBox.Show("La cantidad de bolsas debe ser un número válido mayor a 0.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    dataGridView1.Rows[e.RowIndex].Cells["Bolsas"].Value = 1; // Establecer un valor predeterminado si es inválido
+                    MessageBox.Show("La cantidad de bolsas debe ser un número válido y no puede estar vacía.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView1.Rows[e.RowIndex].Cells["Bolsas"].Value = 1; // Colocar un valor por defecto de 1 para evitar NULL
                 }
             }
         }
