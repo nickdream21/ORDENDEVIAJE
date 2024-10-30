@@ -38,7 +38,7 @@ namespace ORDENDEVIAJE
 
         private void cargarClientes()
         {
-            using (SqlConnection conexion = new SqlConnection("server=NICK;database=SGV;integrated security=true"))
+            using (SqlConnection conexion = new SqlConnection("server=NICK;database=OrdenViajeSGV;integrated security=true"))
             {
                 conexion.Open();
                 string query = "SELECT nombre FROM Cliente";
@@ -57,7 +57,7 @@ namespace ORDENDEVIAJE
 
         private void cargarTractos()
         {
-            using (SqlConnection conexion = new SqlConnection("server=NICK;database=SGV;integrated security=true"))
+            using (SqlConnection conexion = new SqlConnection("server=NICK;database=OrdenViajeSGV;integrated security=true"))
             {
                 conexion.Open();
                 string query = "SELECT placaTracto FROM Tracto";
@@ -76,7 +76,7 @@ namespace ORDENDEVIAJE
 
         private void cargarCarretas()
         {
-            using (SqlConnection conexion = new SqlConnection("server=NICK;database=SGV;integrated security=true"))
+            using (SqlConnection conexion = new SqlConnection("server=NICK;database=OrdenViajeSGV;integrated security=true"))
             {
                 conexion.Open();
                 string query = "SELECT placaCarreta FROM Carreta";
@@ -95,7 +95,7 @@ namespace ORDENDEVIAJE
 
         private void cargarConductores()
         {
-            using (SqlConnection conexion = new SqlConnection("server=NICK;database=SGV;integrated security=true"))
+            using (SqlConnection conexion = new SqlConnection("server=NICK;database=OrdenViajeSGV;integrated security=true"))
             {
                 conexion.Open();
                 string query = "SELECT RTRIM(apPaterno) + ' ' + RTRIM(apMaterno) + ' ' + RTRIM(nombre) AS NombreConductor FROM Conductor";
@@ -154,7 +154,7 @@ namespace ORDENDEVIAJE
 
         private void cargarGuiasTransportista()
         {
-            using (SqlConnection conexion = new SqlConnection("server=NICK;database=SGV;integrated security=true"))
+            using (SqlConnection conexion = new SqlConnection("server=NICK;database=OrdenViajeSGV;integrated security=true"))
             {
                 conexion.Open();
                 string query = @"SELECT numeroGuiaTransportista, numeroGuiaCliente, ruta1, descripcionProducto 

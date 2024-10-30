@@ -92,7 +92,7 @@ namespace ORDENDEVIAJE
             try
             {
                 // Conectar a la base de datos
-                using (SqlConnection conexion = new SqlConnection("server=NICK;database=SGV;integrated security=true"))
+                using (SqlConnection conexion = new SqlConnection("server=NICK;database=OrdenViajeSGV;integrated security=true"))
                 {
                     conexion.Open();
 

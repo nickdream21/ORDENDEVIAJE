@@ -33,7 +33,7 @@
             buttonSalir = new Button();
             panelSubMenuConsultas = new Panel();
             buttonConsultasAlmacen = new Button();
-            buttonConsultasGastos = new Button();
+            btnReportes = new Button();
             buttonConsultas = new Button();
             panelSubMenuRegistro = new Panel();
             buttonRegistroCarretas = new Button();
@@ -111,7 +111,7 @@
             // 
             panelSubMenuConsultas.BackColor = Color.Linen;
             panelSubMenuConsultas.Controls.Add(buttonConsultasAlmacen);
-            panelSubMenuConsultas.Controls.Add(buttonConsultasGastos);
+            panelSubMenuConsultas.Controls.Add(btnReportes);
             panelSubMenuConsultas.Dock = DockStyle.Top;
             panelSubMenuConsultas.Location = new Point(0, 956);
             panelSubMenuConsultas.Name = "panelSubMenuConsultas";
@@ -136,24 +136,24 @@
             buttonConsultasAlmacen.UseVisualStyleBackColor = false;
             buttonConsultasAlmacen.Click += buttonConsultasAlmacen_Click;
             // 
-            // buttonConsultasGastos
+            // btnReportes
             // 
-            buttonConsultasGastos.BackColor = Color.Transparent;
-            buttonConsultasGastos.Dock = DockStyle.Top;
-            buttonConsultasGastos.FlatAppearance.BorderSize = 0;
-            buttonConsultasGastos.FlatAppearance.MouseDownBackColor = Color.White;
-            buttonConsultasGastos.FlatAppearance.MouseOverBackColor = Color.White;
-            buttonConsultasGastos.FlatStyle = FlatStyle.Flat;
-            buttonConsultasGastos.ForeColor = SystemColors.ActiveCaptionText;
-            buttonConsultasGastos.Location = new Point(0, 0);
-            buttonConsultasGastos.Name = "buttonConsultasGastos";
-            buttonConsultasGastos.Padding = new Padding(35, 0, 0, 0);
-            buttonConsultasGastos.Size = new Size(280, 50);
-            buttonConsultasGastos.TabIndex = 0;
-            buttonConsultasGastos.Text = "Gastos";
-            buttonConsultasGastos.TextAlign = ContentAlignment.MiddleLeft;
-            buttonConsultasGastos.UseVisualStyleBackColor = false;
-            buttonConsultasGastos.Click += buttonConsultasGastos_Click;
+            btnReportes.BackColor = Color.Transparent;
+            btnReportes.Dock = DockStyle.Top;
+            btnReportes.FlatAppearance.BorderSize = 0;
+            btnReportes.FlatAppearance.MouseDownBackColor = Color.White;
+            btnReportes.FlatAppearance.MouseOverBackColor = Color.White;
+            btnReportes.FlatStyle = FlatStyle.Flat;
+            btnReportes.ForeColor = SystemColors.ActiveCaptionText;
+            btnReportes.Location = new Point(0, 0);
+            btnReportes.Name = "btnReportes";
+            btnReportes.Padding = new Padding(35, 0, 0, 0);
+            btnReportes.Size = new Size(280, 50);
+            btnReportes.TabIndex = 0;
+            btnReportes.Text = "Reportes";
+            btnReportes.TextAlign = ContentAlignment.MiddleLeft;
+            btnReportes.UseVisualStyleBackColor = false;
+            btnReportes.Click += btnReportes_Click;
             // 
             // buttonConsultas
             // 
@@ -525,7 +525,7 @@
         private Button buttonSalir;
         private Panel panelSubMenuConsultas;
         private Button buttonConsultasAlmacen;
-        private Button buttonConsultasGastos;
+        private Button btnReportes;
         private Panel panelContenedor;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;

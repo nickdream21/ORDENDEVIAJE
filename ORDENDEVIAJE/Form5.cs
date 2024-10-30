@@ -20,6 +20,8 @@ namespace ORDENDEVIAJE
         private Form15 formFacturaInstance; // Para formulario Factura
         private Form14 formCPICInstance; // Para formulario CPIC
 
+        private Form16 formReportes; // Para formulario REPORTES
+
         public Form5()
         {
             InitializeComponent();
@@ -206,11 +208,7 @@ namespace ORDENDEVIAJE
             mostrarSubMenu(panelSubMenuConsultas);
         }
 
-        private void buttonConsultasGastos_Click(object sender, EventArgs e)
-        {
-            // Lógica para consultar Gastos
-            ocultarSubMenu();
-        }
+
 
         private void buttonConsultasAlmacen_Click(object sender, EventArgs e)
         {
@@ -251,6 +249,22 @@ namespace ORDENDEVIAJE
             else
             {
                 formFacturaInstance.BringToFront();
+            }
+
+            ocultarSubMenu();
+        }
+
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            if (formReportes == null || formReportes.IsDisposed)
+            {
+                formReportes = new Form16(); // Formulario para CPIC
+                formReportes.FormClosed += (s, args) => formReportes = null;
+                formReportes.Show();
+            }
+            else
+            {
+                formReportes.BringToFront();
             }
 
             ocultarSubMenu();

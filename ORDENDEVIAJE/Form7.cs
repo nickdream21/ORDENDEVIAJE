@@ -553,7 +553,7 @@ namespace ORDENDEVIAJE
 
         private void SaveIngresos()
         {
-            string connectionString = "Data Source=NICK;Initial Catalog=SGV;Integrated Security=True"; // Asegúrate de que esta sea tu cadena de conexión
+            string connectionString = "Data Source=NICK;Initial Catalog=OrdenViajeSGV;Integrated Security=True"; // Asegúrate de que esta sea tu cadena de conexión
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -622,7 +622,7 @@ VALUES (
 
         private void SaveGastosAdicionales()
         {
-            string connectionString = "Data Source=NICK;Initial Catalog=SGV;Integrated Security=True"; // Asegúrate de que esta sea tu cadena de conexión
+            string connectionString = "Data Source=NICK;Initial Catalog=OrdenViajeSGV;Integrated Security=True"; // Asegúrate de que esta sea tu cadena de conexión
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -666,7 +666,7 @@ VALUES (
 
         private void SaveGastos()
         {
-            string connectionString = "Data Source=NICK;Initial Catalog=SGV;Integrated Security=True"; // Asegúrate de que esta sea tu cadena de conexión
+            string connectionString = "Data Source=NICK;Initial Catalog=OrdenViajeSGV;Integrated Security=True"; // Asegúrate de que esta sea tu cadena de conexión
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

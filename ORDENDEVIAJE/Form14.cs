@@ -12,7 +12,7 @@ namespace ORDENDEVIAJE
 {
     public partial class Form14 : Form
     {
-        private string connectionString = @"Data Source=NICK;Initial Catalog=SGV;Integrated Security=True";
+        private string connectionString = @"Data Source=NICK;Initial Catalog=OrdenViajeSGV;Integrated Security=True";
 
         public Form14()
         {

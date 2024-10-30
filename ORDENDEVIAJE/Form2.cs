@@ -16,7 +16,7 @@ namespace ORDENDEVIAJE
 {
     public partial class Form2 : Form
     {
-        private string connectionString = "server=NICK;database=SGV;integrated security=true";
+        private string connectionString = "server=NICK;database=OrdenViajeSGV;integrated security=true";
         private bool isUpdating = false;
         private DataTable tractosDataTable; // Declarar tractosDataTable aquí
         private DataTable carretasDataTable; // Declarar carretasDataTable aquí
@@ -293,6 +293,10 @@ namespace ORDENDEVIAJE
             {
                 mensajeError.AppendLine("El campo N° Orden Viaje debe estar lleno.");
             }
+            if (string.IsNullOrWhiteSpace(textBox2.Text)) // Verificar si el campo N° CPIC está vacío
+            {
+                mensajeError.AppendLine("El campo N° CPIC debe estar lleno.");
+            }
             if (comboBox1.SelectedIndex == -1)
             {
                 mensajeError.AppendLine("Debe seleccionar un Cliente.");
@@ -316,6 +320,16 @@ namespace ORDENDEVIAJE
                 return;
             }
 
+            // Verificar si el CPIC existe
+            string numeroCPIC = textBox2.Text;
+            int? idCPIC = ObtenerIdCPIC(numeroCPIC);
+
+            if (idCPIC == null)
+            {
+                MessageBox.Show("El número de CPIC ingresado no existe. Por favor, ingrese un número de CPIC válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Recuperar los datos del formulario
             string numeroOrdenViaje = textBox5.Text;
             string fechaSalida = dateTimePicker1.Value.ToString("yyyy-MM-dd");
@@ -329,9 +343,9 @@ namespace ORDENDEVIAJE
             string observaciones = textBox4.Text;
 
             // Guardar los datos en la base de datos
-            string query = @"INSERT INTO OrdenViaje (numeroOrdenViaje, fechaSalida, horaSalida, fechaLlegada, horaLlegada, idCliente, idTracto, idCarreta, idConductor, observaciones) 
+            string query = @"INSERT INTO OrdenViaje (numeroOrdenViaje, fechaSalida, horaSalida, fechaLlegada, horaLlegada, idCliente, idTracto, idCarreta, idConductor, observaciones, idCPIC) 
                      OUTPUT INSERTED.idOrdenViaje 
-                     VALUES (@numeroOrdenViaje, @fechaSalida, @horaSalida, @fechaLlegada, @horaLlegada, @idCliente, @idTracto, @idCarreta, @idConductor, @observaciones)";
+                     VALUES (@numeroOrdenViaje, @fechaSalida, @horaSalida, @fechaLlegada, @horaLlegada, @idCliente, @idTracto, @idCarreta, @idConductor, @observaciones, @idCPIC)";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
@@ -348,6 +362,7 @@ namespace ORDENDEVIAJE
                     command.Parameters.AddWithValue("@idCarreta", placaCarreta ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@idConductor", conductor ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@observaciones", observaciones);
+                    command.Parameters.AddWithValue("@idCPIC", idCPIC.Value);
 
                     try
                     {
@@ -378,5 +393,34 @@ namespace ORDENDEVIAJE
                 }
             }
         }
+
+        private int? ObtenerIdCPIC(string numeroCPIC)
+        {
+            string query = "SELECT idCPIC FROM CPIC WHERE numeroCPIC = @numeroCPIC";
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, conexion))
+                {
+                    command.Parameters.AddWithValue("@numeroCPIC", numeroCPIC);
+
+                    try
+                    {
+                        conexion.Open();
+                        var result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return (int)result;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al verificar el número de CPIC: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+            return null; // No se encontró el CPIC
+        }
+
     }
 }

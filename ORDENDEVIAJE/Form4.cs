@@ -13,7 +13,7 @@ namespace ORDENDEVIAJE
         public string PlantaDescarga { get; set; }
         public string NumeroOrdenViaje { get; set; }
 
-        private string connectionString = @"Data Source=NICK;Initial Catalog=SGV;Integrated Security=True";
+        private string connectionString = @"Data Source=NICK;Initial Catalog=OrdenViajeSGV;Integrated Security=True";
         private Form2 form2;
 
         public Form4(Form2 form2Instance, string numeroOrdenViaje)
