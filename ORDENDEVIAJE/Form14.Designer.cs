@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form14));
             panel1 = new Panel();
             btnGuardar = new Button();
             dataGridView1 = new DataGridView();
@@ -81,7 +82,6 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(889, 149);
             dataGridView1.TabIndex = 9;
-           // dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // dtpFechaEmision
             // 
@@ -164,8 +164,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(966, 468);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form14";
-            Text = "Form14";
+            Text = "REGISTRO DE CPIC";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

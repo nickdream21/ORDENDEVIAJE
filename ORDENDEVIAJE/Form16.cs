@@ -28,6 +28,16 @@ namespace ORDENDEVIAJE
             dataGridView1.Columns.Clear();
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Cambiar a Fill
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.ReadOnly = true;  // Deshabilitar edición
+            dataGridView1.AllowUserToResizeColumns = false;  // Evitar redimensionar columnas
+
+            // Configurar el estilo y alineación
+            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             // Columnas
             var colNumeroOrden = new DataGridViewTextBoxColumn
@@ -76,6 +86,8 @@ namespace ORDENDEVIAJE
             dataGridView1.CellClick += DataGridView1_CellClick;
         }
 
+
+
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "Detalle")
@@ -108,11 +120,12 @@ namespace ORDENDEVIAJE
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = @"SELECT o.numeroOrdenViaje, o.fechaSalida, o.fechaLlegada, 
-                                 CONCAT(c.nombre, ' ', c.apPaterno, ' ', c.apMaterno) AS Conductor
-                                 FROM OrdenViaje o
-                                 INNER JOIN CPIC cp ON o.idCPIC = cp.idCPIC
-                                 INNER JOIN Conductor c ON o.idConductor = c.idConductor
-                                 WHERE cp.numeroCPIC = @numeroCPIC";
+                 RTRIM(c.nombre) + ' ' + RTRIM(c.apPaterno) + ' ' + RTRIM(c.apMaterno) AS Conductor
+                 FROM OrdenViaje o
+                 INNER JOIN CPIC cp ON o.idCPIC = cp.idCPIC
+                 INNER JOIN Conductor c ON o.idConductor = c.idConductor
+                 WHERE cp.numeroCPIC = @numeroCPIC";
+
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@numeroCPIC", numeroCPIC);
@@ -164,6 +177,9 @@ namespace ORDENDEVIAJE
                     }
                 }
 
+                // Ajustar automáticamente el ancho de todas las columnas al contenido
+                worksheet.Columns().AdjustToContents();
+
                 // Guardar el archivo Excel
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx", FileName = "Reporte.xlsx" })
                 {
@@ -183,7 +199,52 @@ namespace ORDENDEVIAJE
             }
         }
 
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicio = dateTimePicker1.Value;
+            DateTime fechaFinal = dateTimePicker2.Value;
+            string numeroCPIC = textBox2.Text.Trim();
 
+            BuscarDatosFinancieros(fechaInicio, fechaFinal, numeroCPIC);
+        }
+
+
+        private void BuscarDatosFinancieros(DateTime fechaInicio, DateTime fechaFinal, string numeroCPIC)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = @"SELECT o.fechaSalida, o.fechaLlegada, cp.numeroCPIC, 
+                            SUM(i.totalSoles) AS TotalIngresos, 
+                            SUM(e.totalSoles) AS TotalEgresos,
+                            (SUM(i.totalSoles) - SUM(e.totalSoles)) AS Balance
+                         FROM OrdenViaje o
+                         INNER JOIN CPIC cp ON o.idCPIC = cp.idCPIC
+                         LEFT JOIN Ingresos i ON o.numeroOrdenViaje = i.numeroOrdenViaje
+                         LEFT JOIN Egresos e ON o.numeroOrdenViaje = e.numeroOrdenViaje
+                         WHERE o.fechaSalida BETWEEN @fechaInicio AND @fechaFinal
+                         AND (@numeroCPIC = '' OR cp.numeroCPIC = @numeroCPIC)
+                         GROUP BY o.fechaSalida, o.fechaLlegada, cp.numeroCPIC";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                command.Parameters.AddWithValue("@fechaFinal", fechaFinal);
+                command.Parameters.AddWithValue("@numeroCPIC", numeroCPIC);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    dataGridView2.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al buscar los datos financieros: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
 

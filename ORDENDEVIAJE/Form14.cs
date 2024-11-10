@@ -56,6 +56,9 @@ namespace ORDENDEVIAJE
             // Definir la columna de bolsas
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "Bolsas", HeaderText = "Cantidad de Bolsas" });
 
+            // Definir la columna de peso (nueva columna)
+            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "PesoKg", HeaderText = "Peso (Kg)" });
+
             // Crear las columnas para los botones de añadir y eliminar
             DataGridViewButtonColumn btnAdd = new DataGridViewButtonColumn();
             btnAdd.HeaderText = "Añadir";
@@ -86,15 +89,17 @@ namespace ORDENDEVIAJE
             // Ajustar el modo de tamaño automático de las columnas para que llenen el espacio del DataGridView
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // Ajustar el ancho de la columna de productos para ocupar espacio proporcional
+            // Ajustar el ancho de las columnas para ocupar espacio proporcional
             dataGridView1.Columns["Producto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns["Bolsas"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns["PesoKg"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // Ajuste para la nueva columna
             dataGridView1.Columns["btnAñadir"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridView1.Columns["btnEliminar"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             // Manejar el evento de clic en las celdas del DataGridView1
             dataGridView1.CellClick += dataGridView1_CellClick;
         }
+
 
 
         // Método para ajustar el ancho de la columna "Producto"
@@ -372,49 +377,45 @@ namespace ORDENDEVIAJE
 
         private void InsertarProductos(int idCPIC, SqlConnection connection, SqlTransaction transaction)
         {
-            string queryProducto = "INSERT INTO CPIC_Productos (idCPIC, idProducto, cantidadBolsasProducto) VALUES (@idCPIC, @idProducto, @cantidadBolsasProducto)";
+            string queryProducto = "INSERT INTO CPIC_Productos (idCPIC, idProducto, cantidadBolsasProducto, pesoKg) VALUES (@idCPIC, @idProducto, @cantidadBolsasProducto, @pesoKg)";
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                // Verificar que las celdas no sean nulas y contengan datos válidos
-                if (row.Cells["Producto"].Value != null && row.Cells["Bolsas"].Value != null)
+                if (row.Cells["Producto"].Value != null && row.Cells["Bolsas"].Value != null && row.Cells["PesoKg"].Value != null)
                 {
                     string producto = row.Cells["Producto"].Value.ToString();
                     string bolsasTexto = row.Cells["Bolsas"].Value.ToString().Trim();
+                    string pesoTexto = row.Cells["PesoKg"].Value.ToString().Trim();
 
-                    // Verificar que la cantidad de bolsas sea un número válido y positivo
-                    if (int.TryParse(bolsasTexto, out int cantidadBolsas) && cantidadBolsas > 0)
+                    if (int.TryParse(bolsasTexto, out int cantidadBolsas) && cantidadBolsas > 0 &&
+                        decimal.TryParse(pesoTexto, out decimal pesoKg) && pesoKg > 0)
                     {
                         using (SqlCommand cmdProducto = new SqlCommand(queryProducto, connection, transaction))
                         {
                             int idProducto = ObtenerIdProducto(producto, connection, transaction);
                             cmdProducto.Parameters.AddWithValue("@idCPIC", idCPIC);
                             cmdProducto.Parameters.AddWithValue("@idProducto", idProducto);
-
-                            // Aquí se asegura de que cantidadBolsas siempre tiene un valor válido
                             cmdProducto.Parameters.AddWithValue("@cantidadBolsasProducto", cantidadBolsas);
-
-                            // Debug para verificar los valores antes de insertar
-                            Debug.WriteLine($"Insertando producto: ID Producto = {idProducto}, Cantidad Bolsas = {cantidadBolsas}");
+                            cmdProducto.Parameters.AddWithValue("@pesoKg", pesoKg); // Nuevo campo Peso
 
                             cmdProducto.ExecuteNonQuery();
                         }
                     }
                     else
                     {
-                        MessageBox.Show($"La cantidad de bolsas para el producto '{producto}' debe ser un número válido mayor a 0.",
+                        MessageBox.Show($"La cantidad de bolsas para el producto '{producto}' debe ser un número positivo y el peso debe ser mayor a 0.",
                                         "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        throw new Exception("Cantidad de bolsas no válida.");
+                        throw new Exception("Cantidad de bolsas o peso no válido.");
                     }
                 }
                 else
                 {
-                    // Mensaje si la fila tiene un valor nulo o vacío en "Producto" o "Bolsas"
-                    MessageBox.Show("Cada fila debe tener un producto seleccionado y una cantidad de bolsas ingresada.",
+                    MessageBox.Show("Cada fila debe tener un producto, cantidad de bolsas y peso especificado.",
                                     "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     throw new Exception("Fila con datos incompletos.");
                 }
             }
+
         }
 
 
@@ -423,14 +424,25 @@ namespace ORDENDEVIAJE
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridView1.Columns["Bolsas"].Index && e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
-                // Verificar si el valor en la celda es nulo o no válido
-                string valor = dataGridView1.Rows[e.RowIndex].Cells["Bolsas"].Value?.ToString().Trim();
-                if (string.IsNullOrWhiteSpace(valor) || !int.TryParse(valor, out int cantidad))
+                if (e.ColumnIndex == dataGridView1.Columns["Bolsas"].Index)
                 {
-                    MessageBox.Show("La cantidad de bolsas debe ser un número válido y no puede estar vacía.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    dataGridView1.Rows[e.RowIndex].Cells["Bolsas"].Value = 1; // Colocar un valor por defecto de 1 para evitar NULL
+                    string valor = dataGridView1.Rows[e.RowIndex].Cells["Bolsas"].Value?.ToString().Trim();
+                    if (string.IsNullOrWhiteSpace(valor) || !int.TryParse(valor, out int cantidad))
+                    {
+                        MessageBox.Show("La cantidad de bolsas debe ser un número válido.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dataGridView1.Rows[e.RowIndex].Cells["Bolsas"].Value = 1;
+                    }
+                }
+                else if (e.ColumnIndex == dataGridView1.Columns["PesoKg"].Index)
+                {
+                    string valor = dataGridView1.Rows[e.RowIndex].Cells["PesoKg"].Value?.ToString().Trim();
+                    if (string.IsNullOrWhiteSpace(valor) || !decimal.TryParse(valor, out decimal peso) || peso <= 0)
+                    {
+                        MessageBox.Show("El peso debe ser un número positivo.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dataGridView1.Rows[e.RowIndex].Cells["PesoKg"].Value = 1.0;
+                    }
                 }
             }
         }

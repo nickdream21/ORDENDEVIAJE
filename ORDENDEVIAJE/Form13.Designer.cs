@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form13));
             panel1 = new Panel();
             button2 = new Button();
             textBox3 = new TextBox();
@@ -143,6 +144,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(358, 450);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form13";
             Text = "Form13";
             panel1.ResumeLayout(false);

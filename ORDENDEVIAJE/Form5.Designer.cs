@@ -490,8 +490,9 @@
             ClientSize = new Size(1198, 746);
             Controls.Add(panelContenedor);
             Controls.Add(panelMenuLateral);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form5";
-            Text = "Form5";
+            Text = "SISTEMA DE GESTIÓN DE TRANSPORTE - SGV";
             WindowState = FormWindowState.Maximized;
             panelMenuLateral.ResumeLayout(false);
             panelSubMenuConsultas.ResumeLayout(false);

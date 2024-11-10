@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form15));
             panel1 = new Panel();
             btnGuardar = new Button();
             txtImporteTotal = new TextBox();
@@ -131,6 +132,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(480, 352);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form15";
             Text = "Form15";
             panel1.ResumeLayout(false);

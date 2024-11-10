@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form8));
             label1 = new Label();
             comboBox1 = new ComboBox();
             label2 = new Label();
@@ -263,6 +264,7 @@
             Controls.Add(label2);
             Controls.Add(comboBox1);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form8";
             Text = "Form8";
             ResumeLayout(false);

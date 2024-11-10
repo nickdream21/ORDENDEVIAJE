@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form7));
             dataGridViewIngresos = new DataGridView();
             dataGridViewGastos = new DataGridView();
             label1 = new Label();
@@ -158,6 +159,7 @@
             Controls.Add(dataGridViewGastos);
             Controls.Add(dataGridViewIngresos);
             Controls.Add(panel2);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form7";
             Text = "Form7";
             ((System.ComponentModel.ISupportInitialize)dataGridViewIngresos).EndInit();

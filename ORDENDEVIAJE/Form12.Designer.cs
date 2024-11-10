@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form12));
             panel1 = new Panel();
             button2 = new Button();
             button1 = new Button();
@@ -614,6 +615,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1125, 948);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form12";
             Text = "Form12";
             panel1.ResumeLayout(false);
